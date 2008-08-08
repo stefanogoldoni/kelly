@@ -12,7 +12,7 @@ namespace Kelly.Geometry {
 		public Point Position { get; private set; }
 		public float Radius { get; private set; }
 
-		public Intersection IntersectWith(Ray ray) {
+		public bool IntersectWith(Ray ray, out float distance) {
 			var between = ray.Origin - this.Position;
 
 			float b = Vector.DotProduct(between, ray.Direction);
@@ -20,14 +20,15 @@ namespace Kelly.Geometry {
 			float d = b * b - c;
 
 			if (d <= 0) {
-				return null;
+				distance = float.PositiveInfinity;
+				return false;
 			}
 
-			var distance = (b > 0) 
+			distance = (b > 0) 
 				? -b + (float)System.Math.Sqrt(d) 
 				: -b - (float)System.Math.Sqrt(d);
 
-			return new Intersection(ray, distance);
+			return true;
 		}
 	}
 }
