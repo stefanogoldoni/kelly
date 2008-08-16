@@ -58,6 +58,7 @@
     <Compile Include="IRenderingAlgorithm.cs" />
     <Compile Include="Materials\IMaterial.cs" />
     <Compile Include="Math\IRandomNumberGenerator.cs" />
+    <Compile Include="Math\Matrix.cs" />
     <Compile Include="Math\NaiveRandomNumberGenerator.cs" />
     <Compile Include="Math\Point.cs" />
     <Compile Include="Math\Ray.cs" />
