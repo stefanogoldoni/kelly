@@ -1,6 +1,9 @@
 ﻿using System.Diagnostics;
 
 namespace Kelly.Math {
+	/// <summary>
+	/// Our points always assume that w = 1.
+	/// </summary>
 	[DebuggerDisplay("({X}, {Y}, {Z})")]
 	public struct Point {
 		public Point(float x, float y, float z) {
@@ -21,6 +24,10 @@ namespace Kelly.Math {
 
 		public float Z {
 			get { return _z; }
+		}
+
+		public Vector ToVector() {
+			return new Vector(X, Y, Z);
 		}
 
 		public static Vector operator -(Point x, Point y) {

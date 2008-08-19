@@ -1,6 +1,9 @@
 ﻿using System.Diagnostics;
 
 namespace Kelly.Math {
+	/// <summary>
+	/// Our vectors always assume that w = 0.
+	/// </summary>
 	[DebuggerDisplay("({X}, {Y}, {Z})")]
 	public struct Vector {
 		public Vector(float x, float y, float z) {
@@ -9,7 +12,7 @@ namespace Kelly.Math {
 			_z = z;
 		}
 
-		public readonly float _x, _y, _z;
+		private readonly float _x, _y, _z;
 
 		public float X {
 			get { return _x; }
@@ -31,12 +34,6 @@ namespace Kelly.Math {
 			get { return (float)System.Math.Sqrt(SquaredLength); }
 		}
 
-		public static float DotProduct(Vector x, Vector y) {
-			return x.X * y.X
-				 + x.Y * y.Y
-				 + x.Z * y.Z;
-		}
-
 		public Vector Scale(float s) {
 			return new Vector(X * s, Y * s, Z * s);
 		}
@@ -45,8 +42,14 @@ namespace Kelly.Math {
 			get { return SquaredLength == 1.0f; }
 		}
 
-		public Vector ToUnit() {
+		public Vector ToUnitVector() {
 			return Scale(1.0f / Length);
+		}
+
+		public static float DotProduct(Vector x, Vector y) {
+			return x.X * y.X
+				 + x.Y * y.Y
+				 + x.Z * y.Z;
 		}
 	}
 }

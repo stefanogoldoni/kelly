@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Geometry\SphereSpecs.cs" />
+    <Compile Include="Math\MatrixSpecs.cs" />
     <Compile Include="PointSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RaySpecs.cs" />
