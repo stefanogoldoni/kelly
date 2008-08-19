@@ -3,7 +3,9 @@ using FrigginAwesome;
 
 namespace Kelly.Math {
 	/// <summary>
-	/// Our matrices are row-major.
+	/// Our 4x4 matrix class.
+	/// 
+	/// We represent matrices using row-major form.
 	/// </summary>
 	public class Matrix {
 		private Matrix() {
@@ -98,11 +100,22 @@ namespace Kelly.Math {
 			return minor;
 		}
 
+		public Matrix Transpose() {
+			var transpose = new Matrix();
+
+			for (var row = 0; row < 4; row++)
+			for (var col = 0; col < 4; col++) {
+				transpose[row, col] = this[col, row];
+			}
+
+			return transpose;
+		}
+
 		public static Matrix operator *(Matrix left, Matrix right) {
 			throw new NotImplementedException();
 		}
 
-		public static Matrix Scaling(float value) {
+		public static Matrix UniformScaling(float value) {
 			return Scaling(value, value, value);
 		}
 
@@ -156,7 +169,7 @@ namespace Kelly.Math {
 			);
 		}
 
-		public static readonly Matrix Zero = Matrix.Scaling(0f);
-		public static readonly Matrix Identity = Matrix.Scaling(1f);
+		public static readonly Matrix Zero = Matrix.UniformScaling(0f);
+		public static readonly Matrix Identity = Matrix.UniformScaling(1f);
 	}
 }
