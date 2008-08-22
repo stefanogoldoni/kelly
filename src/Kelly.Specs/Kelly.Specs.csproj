@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EqualitySpecs.cs" />
     <Compile Include="Geometry\SphereSpecs.cs" />
     <Compile Include="Math\MatrixSpecs.cs" />
     <Compile Include="PointSpecs.cs" />

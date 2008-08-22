@@ -1,5 +1,8 @@
 ﻿using System;
 using FrigginAwesome;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
 
 namespace Kelly.Math {
 	/// <summary>
@@ -7,9 +10,47 @@ namespace Kelly.Math {
 	/// 
 	/// We represent matrices using row-major form.
 	/// </summary>
+	[DebuggerDisplay("{ToString()}")]
 	public class Matrix {
 		private Matrix() {
 			_values = new float[4, 4];
+		}
+
+		public Matrix(IEnumerable<float> values) {
+			_values = new float[4, 4];
+
+			int row = 0, col = 0;
+
+			foreach (var element in values) {
+				if (row >= 4) {
+					throw new ArgumentException("The passed enumerable contained more than 16 elements.", "values");
+				}
+
+				_values[row, col] = element;
+
+				col++;
+
+				if (col == 4) {
+					row++;
+
+					if (row < 4) {
+						col = 0;
+					}
+				}
+			}
+
+			if (row < 4 || col < 4) {
+				throw new ArgumentException("The passed enumerable contained fewer than 16 elements.", "values");
+			}
+		}
+
+		public Matrix(float[,] values) {
+			if (values.GetLength(0) != 4 || values.GetLength(1) != 4) {
+				throw new ArgumentException("The passed array does not have the correct dimensions. You can only initialize a matrix from a 4-by-4 array.", "values");
+			}
+
+			_values = new float[4, 4];
+			Array.Copy(values, _values, 16);
 		}
 
 		public Matrix(
@@ -45,70 +86,6 @@ namespace Kelly.Math {
 		public float this[int x, int y] {
 			get { return _values[x, y]; }
 			private set { _values[x, y] = value; }
-		}
-
-		public Matrix Inverse() {
-			throw new NotImplementedException();
-		}
-
-		public float CalculateDeterminant() {
-			return _values[0, 0] * Determinant3x3(Minor(0, 0))
-				- _values[0, 1] * Determinant3x3(Minor(0, 1))
-				+ _values[0, 2] * Determinant3x3(Minor(0, 2))
-				- _values[0, 3] * Determinant3x3(Minor(0, 3));
-		}
-
-		private float Determinant3x3(float[,] matrix) {
-			var a = matrix[0, 0];
-			var b = matrix[0, 1];
-			var c = matrix[0, 2];
-
-			var d = matrix[1, 0];
-			var e = matrix[1, 1];
-			var f = matrix[1, 2];
-
-			var g = matrix[2, 0];
-			var h = matrix[2, 1];
-			var i = matrix[2, 2];
-
-			return ((a * e * i) + (b * f * g) + (c * d * h))
-				- ((g * e * c) + (h * f * a) + (i * d * b));
-		}
-
-		/// <summary>
-		/// Returns the 3x3 minor matrix for the passed row and column.
-		/// More info at http://en.wikipedia.org/wiki/Cofactor_(linear_algebra)
-		/// </summary>
-		private float[,] Minor(int row, int column) {
-			var minor = new float[3, 3];
-
-			for (int x = 0, minorX = 0; x < 4; x++) {
-				if (x == row)
-					continue;
-
-				for (int y = 0, minorY = 0; y < 4; y++) {
-					if (y == 0)
-						continue;
-
-					minor[minorX, minorY] = _values[x, y];
-					minorY++;
-				}
-
-				minorX++;
-			}
-
-			return minor;
-		}
-
-		public Matrix Transpose() {
-			var transpose = new Matrix();
-
-			for (var row = 0; row < 4; row++)
-			for (var col = 0; col < 4; col++) {
-				transpose[row, col] = this[col, row];
-			}
-
-			return transpose;
 		}
 
 		public static Matrix operator *(Matrix left, Matrix right) {
@@ -171,5 +148,55 @@ namespace Kelly.Math {
 
 		public static readonly Matrix Zero = Matrix.UniformScaling(0f);
 		public static readonly Matrix Identity = Matrix.UniformScaling(1f);
+
+		public static bool operator ==(Matrix left, Matrix right) {
+			return left.Equals(right);
+		}
+
+		public static bool operator !=(Matrix left, Matrix right) {
+			return !left.Equals(right);
+		}
+
+		public override bool Equals(object obj) {
+			if (object.ReferenceEquals(this, obj))
+				return true;
+
+			var matrix = obj as Matrix;
+
+			if (object.ReferenceEquals(matrix, null))
+				return false;
+
+			for (var row = 0; row < 4; row++)
+			for (var col = 0; col < 4; col++) {
+				if (matrix[row, col] != this[row, col])
+					return false;
+			}
+
+			return true;
+		}
+
+		public override int GetHashCode() {
+			var hashCode = 0;
+
+			foreach (var value in _values) {
+				hashCode = (hashCode << 5) ^ value.GetHashCode();
+			}
+
+			return hashCode;
+		}
+
+		public Matrix Clone(){
+			return new Matrix(_values);
+		}
+
+		public override string ToString() {
+			var builder = new StringBuilder();
+
+			for (var row = 0; row < 4; row++) {
+				builder.AppendFormat("{{{0}, {1}, {2}, {3}}}", this[row, 0], this[row, 1], this[row, 2], this[row, 3]);
+			}
+
+			return builder.ToString();
+		}
 	}
 }
