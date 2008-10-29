@@ -1,8 +1,7 @@
-﻿using Kelly.Geometry;
-using Kelly.Math;
+﻿using Kelly.Math;
 
 namespace Kelly {
-	public class DebugRenderingAlgorithm : IRenderingAlgorithm {
+	public class DebugTracingAlgorithm : ITracingAlgorithm {
 		public Color DetermineRayColor(Ray ray, IScene scene) {
 			var intersection = scene.IntersectWith(ray);
 

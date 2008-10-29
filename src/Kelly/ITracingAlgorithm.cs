@@ -2,7 +2,7 @@
 using Kelly.Math;
 
 namespace Kelly {
-	public interface IRenderingAlgorithm {
+	public interface ITracingAlgorithm {
 		Color DetermineRayColor(Ray ray, IScene scene);
 	}
 }

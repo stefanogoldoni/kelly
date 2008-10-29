@@ -1,15 +1,14 @@
-﻿using Kelly.Geometry;
-using FrigginAwesome;
+﻿using FrigginAwesome;
 
 namespace Kelly {
-	public class Renderer {
-		public Renderer(IRenderingAlgorithm algorithm) {
+	public class TracingRenderer : IRenderer {
+		public TracingRenderer(ITracingAlgorithm algorithm) {
 			Ensure.That("algorithm", algorithm).IsNotNull();
 
 			_algorithm = algorithm;
 		}
 
-		private IRenderingAlgorithm _algorithm;
+		private readonly ITracingAlgorithm _algorithm;
 
 		public void RenderScene(IRenderingSurface surface, ICamera camera, IScene scene) {
 			Ensure.That("surface", surface).IsNotNull();
