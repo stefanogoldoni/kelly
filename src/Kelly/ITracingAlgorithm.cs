@@ -1,5 +1,4 @@
-﻿using Kelly.Geometry;
-using Kelly.Math;
+﻿using Kelly.Math;
 
 namespace Kelly {
 	public interface ITracingAlgorithm {

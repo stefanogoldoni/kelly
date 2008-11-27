@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using Kelly.Math;
+﻿using Kelly.Math;
 
 namespace Kelly {
 	public interface ICamera {
-		IEnumerable<Ray> GetRaysThroughPixel(Pixel pixel);
+		Ray CreateRayThroughImagePlane(Point2 point);
+
+		Point2 FindIntersectionWithImagePlane(Ray ray);
 	}
 }

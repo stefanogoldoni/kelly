@@ -2,7 +2,6 @@
 using System.Linq;
 using FrigginAwesome;
 using Kelly.Math;
-using Kelly.Geometry;
 
 namespace Kelly {
 	public class NaiveScene : IIntersectable {
@@ -13,19 +12,12 @@ namespace Kelly {
 		private readonly IList<RenderableGeometry> _geometry;
 
 		public Intersection Intersects(Ray ray) {
-			Intersection closestIntersection = null;
-
-			foreach (var renderable in _geometry) {
-				var intersection = renderable.Geometry.Intersects(ray);
-
-				if (closestIntersection == null 
-					|| (intersection != null && intersection.Distance < closestIntersection.Distance)) {
-
-					closestIntersection = intersection;
-				}
-			}
-
-			return closestIntersection;
+			return _geometry
+				.Select(g => g.Geometry.Intersects(ray))
+				.Aggregate((left, right) => 
+					left.Distance < right.Distance 
+					? left 
+					: right);
 		}
 
 		public void AddGeometry(RenderableGeometry geometry) {

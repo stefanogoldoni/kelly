@@ -1,5 +1,4 @@
-﻿using Kelly.Geometry;
-using Kelly.Materials;
+﻿using Kelly.Materials;
 
 namespace Kelly {
 	public class RenderableGeometry {

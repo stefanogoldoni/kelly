@@ -1,6 +1,6 @@
 ﻿using Kelly.Math;
 
-namespace Kelly.Geometry {
+namespace Kelly {
 	public interface IIntersectable {
 		Intersection Intersects(Ray ray);
 	}

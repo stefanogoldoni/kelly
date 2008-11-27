@@ -27,5 +27,7 @@ namespace Kelly {
 				return Material.GetColorAt(Point);
 			}
 		}
+
+		public static Intersection None = new Intersection(null, float.PositiveInfinity, null);
 	}
 }

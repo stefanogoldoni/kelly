@@ -10,7 +10,7 @@ namespace Kelly.Console {
 
 			var renderer = container.GetService<IRenderer>();
 
-			var surface = new BitmapRenderingSurface(40, 30);
+			var surface = new BitmapRenderTarget(40, 30);
 
 			renderer.RenderScene(surface, null, null);
 		}

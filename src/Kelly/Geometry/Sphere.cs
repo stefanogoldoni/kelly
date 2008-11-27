@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Kelly.Math;
+﻿using Kelly.Math;
 
 namespace Kelly.Geometry {
 	public class Sphere : IIntersectable {
@@ -20,7 +18,7 @@ namespace Kelly.Geometry {
 			var d = b * b - c;
 
 			if (d <= 0) {
-				return null;
+				return Intersection.None;
 			}
 
 			var distance = (b > 0) 

@@ -1,5 +1,4 @@
 ﻿using Kelly.Math;
-using Kelly.Geometry;
 
 namespace Kelly {
 	public class DebugTracingAlgorithm : ITracingAlgorithm {
