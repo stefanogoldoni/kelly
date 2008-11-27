@@ -12,23 +12,22 @@ namespace Kelly.Geometry {
 		public Point Position { get; private set; }
 		public float Radius { get; private set; }
 
-		public bool IntersectWith(Ray ray, out float distance) {
-			var between = ray.Origin - this.Position;
+		public Intersection Intersects(Ray ray) {
+			var between = ray.Origin - Position;
 
-			float b = Vector.DotProduct(between, ray.Direction);
-			float c = between.SquaredLength - (Radius * Radius);
-			float d = b * b - c;
+			var b = Vector.DotProduct(between, ray.Direction);
+			var c = between.SquaredLength - (Radius * Radius);
+			var d = b * b - c;
 
 			if (d <= 0) {
-				distance = float.PositiveInfinity;
-				return false;
+				return null;
 			}
 
-			distance = (b > 0) 
+			var distance = (b > 0) 
 				? -b + (float)System.Math.Sqrt(d) 
 				: -b - (float)System.Math.Sqrt(d);
 
-			return true;
+			return new Intersection(ray, distance);
 		}
 	}
 }

@@ -3,6 +3,9 @@ using Kelly.Materials;
 
 namespace Kelly {
 	public class Intersection {
+		public Intersection(Ray ray, float distance) : this(ray, distance, null) {
+		}
+
 		public Intersection(Ray ray, float distance, IMaterial material) {
 			Ray = ray;
 			Distance = distance;

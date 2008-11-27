@@ -1,33 +1,31 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FrigginAwesome;
 using Kelly.Math;
+using Kelly.Geometry;
 
 namespace Kelly {
-	public class NaiveScene : IScene {
+	public class NaiveScene : IIntersectable {
 		public NaiveScene() {
 			_geometry = new List<RenderableGeometry>();
 		}
 
-		private IList<RenderableGeometry> _geometry;
+		private readonly IList<RenderableGeometry> _geometry;
 
-		public Intersection IntersectWith(Ray ray) {
-			float closestDistance = float.PositiveInfinity;
-			RenderableGeometry closestGeometry = null;
+		public Intersection Intersects(Ray ray) {
+			Intersection closestIntersection = null;
 
 			foreach (var renderable in _geometry) {
-				float distance;
+				var intersection = renderable.Geometry.Intersects(ray);
 
-				if (renderable.Geometry.IntersectWith(ray, out distance)) {
-					if (distance < closestDistance) {
-						closestDistance = distance;
-						closestGeometry = renderable;
-					}
+				if (closestIntersection == null 
+					|| (intersection != null && intersection.Distance < closestIntersection.Distance)) {
+
+					closestIntersection = intersection;
 				}
 			}
 
-			return closestGeometry == null
-			    ? null
-				: new Intersection(ray, closestDistance, closestGeometry.Material);
+			return closestIntersection;
 		}
 
 		public void AddGeometry(RenderableGeometry geometry) {

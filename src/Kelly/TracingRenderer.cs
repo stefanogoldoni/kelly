@@ -1,4 +1,5 @@
 ﻿using FrigginAwesome;
+using Kelly.Geometry;
 
 namespace Kelly {
 	public class TracingRenderer : IRenderer {
@@ -10,7 +11,7 @@ namespace Kelly {
 
 		private readonly ITracingAlgorithm _algorithm;
 
-		public void RenderScene(IRenderingSurface surface, ICamera camera, IScene scene) {
+		public void RenderScene(IRenderingSurface surface, ICamera camera, IIntersectable scene) {
 			Ensure.That("surface", surface).IsNotNull();
 			Ensure.That("camera", camera).IsNotNull();
 			Ensure.That("scene", scene).IsNotNull();

@@ -50,7 +50,6 @@
     <Compile Include="Geometry\IIntersectable.cs" />
     <Compile Include="Intersection.cs" />
     <Compile Include="IRenderer.cs" />
-    <Compile Include="IScene.cs" />
     <Compile Include="Geometry\Sphere.cs" />
     <Compile Include="ICamera.cs" />
     <Compile Include="Imaging\BitmapImage.cs" />

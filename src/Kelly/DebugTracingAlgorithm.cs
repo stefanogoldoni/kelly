@@ -1,15 +1,12 @@
 ﻿using Kelly.Math;
+using Kelly.Geometry;
 
 namespace Kelly {
 	public class DebugTracingAlgorithm : ITracingAlgorithm {
-		public Color DetermineRayColor(Ray ray, IScene scene) {
-			var intersection = scene.IntersectWith(ray);
+		public Color DetermineRayColor(Ray ray, IIntersectable scene) {
+			var intersection = scene.Intersects(ray);
 
-			if (intersection == null) {
-				return Color.Black;
-			}
-
-			return intersection.Color;
+			return intersection == null ? Color.Black : intersection.Color;
 		}
 	}
 }

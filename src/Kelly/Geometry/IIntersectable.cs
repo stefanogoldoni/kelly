@@ -2,6 +2,6 @@
 
 namespace Kelly.Geometry {
 	public interface IIntersectable {
-		bool IntersectWith(Ray ray, out float distance);
+		Intersection Intersects(Ray ray);
 	}
 }
