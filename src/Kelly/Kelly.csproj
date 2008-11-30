@@ -72,6 +72,7 @@
     <Compile Include="IRenderTarget.cs" />
     <Compile Include="RenderableGeometry.cs" />
     <Compile Include="RenderTargetExtensions.cs" />
+    <Compile Include="SimpleCamera.cs" />
     <Compile Include="TracingRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

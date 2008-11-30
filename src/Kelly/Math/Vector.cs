@@ -51,5 +51,41 @@ namespace Kelly.Math {
 				 + x.Y * y.Y
 				 + x.Z * y.Z;
 		}
+
+		public static Vector CrossProduct(Vector left, Vector right) {
+			return
+				(left.Y * right.Z - left.Z * right.Y) * UnitX +
+				(left.Z * right.X - left.X * right.Z) * UnitY +
+				(left.X * right.Y - left.Y * right.X) * UnitZ;					
+		}
+
+		public static Vector operator +(Vector left, Vector right) {
+			return new Vector(
+				left.X + right.X,
+				left.Y + right.Y,
+				left.Z + right.Z
+			);
+		}
+
+		public static Vector operator -(Vector left, Vector right) {
+			return new Vector(
+				left.X - right.X,
+				left.Y - right.Y,
+				left.Z - right.Z
+			);			
+		}
+
+		public static Vector operator *(Vector vector, float scalar) {
+			return vector.Scale(scalar);
+		}
+
+		public static Vector operator *(float scalar, Vector vector) {
+			return vector * scalar;
+		}
+
+		public static readonly Vector Zero = new Vector(0, 0, 0);
+		public static readonly Vector UnitX = new Vector(1f, 0, 0);
+		public static readonly Vector UnitY = new Vector(0, 1f, 0);
+		public static readonly Vector UnitZ = new Vector(0, 0, 1f);
 	}
 }
