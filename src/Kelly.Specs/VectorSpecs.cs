@@ -4,7 +4,7 @@ using Kelly.Math;
 namespace Kelly.Specs {
 	public class VectorSpecs {
 		[Fact]
-		public void DotProduct_ReturnsCorrectValues() {
+		public void DotProduct_ReturnsDotProductOfTwoVectors() {
 			Assert.Equal(0.0f,
 				Vector.DotProduct(new Vector(1, 2, 3), new Vector(0, 0, 0)));
 
@@ -55,37 +55,22 @@ namespace Kelly.Specs {
 		}
 
 		[Fact]
-		public void Scale_ReturnsVectorScaledBySpecifiedAmount() {
-			Assert.Equal(
-				new Vector(2, 4, 6),
-				new Vector(1, 2, 3).Scale(2));
-
-			Assert.Equal(
-				new Vector(2, 0, 0),
-				new Vector(1, 0, 0).Scale(2));
-
-			Assert.Equal(
-				new Vector(1, 1, 1),
-				new Vector(2, 2, 2).Scale(0.5f));
-		}
-
-		[Fact]
 		public void Length_ReturnsLengthOfVector() {
 			Assert.Equal(
 				1f, 
-				new Vector(1f, 0, 0).Length);
-
-			Assert.Equal(
-				System.Math.Sqrt(2f),
-				new Vector(1f, 1f, 0).Length);
-
-			Assert.Equal(
-				System.Math.Sqrt(3f),
-				new Vector(1f, 1f, 1f).Length);
+				new Vector(1, 0, 0).Length);
 
 			Assert.Equal(
 				5f,
-				new Vector(5f, 0, 0).Length);
+				new Vector(5, 0, 0).Length);
+
+			Assert.Equal(
+				5f,
+				new Vector(0, 5, 0).Length);
+
+			Assert.Equal(
+				5f,
+				new Vector(0, 0, 5).Length);
 		}
 
 		[Fact]
@@ -104,16 +89,45 @@ namespace Kelly.Specs {
 
 		[Fact]
 		public void ToUnitVector_ReturnsUnitVector() {
-			Assert.True(new Vector(7f, 0, 0).ToUnitVector().IsUnit);
-			Assert.True(new Vector(0, 7f, 0).ToUnitVector().IsUnit);
-			Assert.True(new Vector(0, 0, 7f).ToUnitVector().IsUnit);
+			Assert.True(new Vector(7, 0, 0).ToUnitVector().IsUnit);
+			Assert.True(new Vector(0, 7, 0).ToUnitVector().IsUnit);
+			Assert.True(new Vector(0, 0, 7).ToUnitVector().IsUnit);
 
 			Assert.True(new Vector(.1f, 0, 0).ToUnitVector().IsUnit);
 			Assert.True(new Vector(0, .1f, 0).ToUnitVector().IsUnit);
 			Assert.True(new Vector(0, 0, .1f).ToUnitVector().IsUnit);
 
-			Assert.True(new Vector(2f, 2f, 15f).ToUnitVector().IsUnit);
 			Assert.True(new Vector(.1f, .02f, .3f).ToUnitVector().IsUnit);
+		}
+
+		[Fact]
+		public void CrossProduct_SatisfiesUnitInvariants() {
+			Assert.Equal(
+				Vector.UnitX,
+				Vector.CrossProduct(Vector.UnitY, Vector.UnitZ));
+
+			Assert.Equal(
+				Vector.UnitY,
+				Vector.CrossProduct(Vector.UnitZ, Vector.UnitX));
+
+			Assert.Equal(
+				Vector.UnitZ,
+				Vector.CrossProduct(Vector.UnitX, Vector.UnitY));
+		}
+
+		[Fact]
+		public void OperatorMultiplication_ReturnsVectorScaledBySpecifiedAmount() {
+			Assert.Equal(
+				new Vector(2, 4, 6),
+				new Vector(1, 2, 3) * 2);
+
+			Assert.Equal(
+				new Vector(2, 0, 0),
+				new Vector(1, 0, 0) * 2);
+
+			Assert.Equal(
+				new Vector(1, 1, 1),
+				new Vector(2, 2, 2) * .5f);
 		}
 
 		[Fact]
@@ -123,8 +137,8 @@ namespace Kelly.Specs {
 				Vector.UnitX + Vector.UnitY);
 
 			Assert.Equal(
-				new Vector(1f, 2f, 3),
-				new Vector(1f, 0f, 3f) + new Vector(0f, 2f, 3f));
+				new Vector(1, 2, 3),
+				new Vector(1, 0, 3) + new Vector(0, 2, 0));
 
 			Assert.Equal(
 				new Vector(1, 1, 1),
@@ -143,7 +157,22 @@ namespace Kelly.Specs {
 
 			Assert.Equal(
 				new Vector(3, -4, 12),
-				new Vector(5, 7, 18) + new Vector(2, 11, 6));
+				new Vector(5, 7, 18) - new Vector(2, 11, 6));
+		}
+
+		[Fact]
+		public void OperatorDivision_ReturnsVectorScaledByInverseOfSpecifiedAmount() {
+			Assert.Equal(
+				new Vector(1, 0, 0),
+				new Vector(5, 0, 0) / 5);
+
+			Assert.Equal(
+				new Vector(1, 1, 1),
+				new Vector(5, 5, 5) / 5);
+
+			Assert.Equal(
+				new Vector(3, 2, 1),
+				new Vector(39, 26, 13) / 13);
 		}
 	}
 }

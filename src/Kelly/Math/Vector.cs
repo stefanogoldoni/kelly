@@ -43,7 +43,7 @@ namespace Kelly.Math {
 		}
 
 		public Vector ToUnitVector() {
-			return Scale(1.0f / Length);
+			return this / Length;
 		}
 
 		public static float DotProduct(Vector x, Vector y) {
@@ -76,11 +76,21 @@ namespace Kelly.Math {
 		}
 
 		public static Vector operator *(Vector vector, float scalar) {
-			return vector.Scale(scalar);
+			return new Vector(
+				vector.X * scalar,
+				vector.Y * scalar,
+				vector.Z * scalar);
 		}
 
 		public static Vector operator *(float scalar, Vector vector) {
 			return vector * scalar;
+		}
+
+		public static Vector operator /(Vector vector, float scalar) {
+			return new Vector(
+				vector.X / scalar, 
+				vector.Y / scalar, 
+				vector.Z / scalar);
 		}
 
 		public static readonly Vector Zero = new Vector(0, 0, 0);

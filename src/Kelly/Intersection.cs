@@ -18,7 +18,7 @@ namespace Kelly {
 
 		public Point Point {
 			get {
-				return Ray.Origin + Ray.Direction.Scale(Distance);
+				return Ray.Origin + (Ray.Direction * Distance);
 			}
 		}
 
