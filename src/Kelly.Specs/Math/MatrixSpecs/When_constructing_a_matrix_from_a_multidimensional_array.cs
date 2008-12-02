@@ -2,8 +2,8 @@ using System;
 using Kelly.Math;
 using Xunit;
 
-namespace Kelly.Specs.Math {
-	public partial class MatrixSpecs {
+namespace Kelly.Specs.Math.MatrixSpecs {
+	public class When_constructing_a_matrix_from_an_array {
 		[Fact]
 		public void An_ArgumentException_is_thrown_when_the_width_of_the_array_is_less_than_4() {
 			Assert.Throws(typeof (ArgumentException), () => { new Matrix(new float[3,4]); });

@@ -1,20 +1,16 @@
-﻿using System;
+using System;
 using System.Linq;
 using Kelly.Math;
 
-namespace Kelly.Specs.Math {
-	public partial class MatrixSpecs : EqualitySpecs<Matrix> {
+namespace Kelly.Specs.Math.MatrixSpecs {
+	public class When_comparing_two_matrices : EqualitySpecs<Matrix> {
 		private static readonly Random _rng = new Random();
-
-		public static Matrix CreateMatrixWithSequentialElements() {
-			return new Matrix(Enumerable.Range(1, 16).Cast<float>());
-		}
-
+		
 		protected override Matrix GetRandomInstance() {
 			return new Matrix(
 				Enumerable
 					.Repeat(0f, 16)
-					.Select(x => (float) _rng.NextDouble() * 10f));
+					.Select(x => (float)_rng.NextDouble() * 10f));
 		}
 
 		protected override Matrix[] GetRandomInstancesThatAreEqual(int count) {

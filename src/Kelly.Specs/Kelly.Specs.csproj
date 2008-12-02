@@ -57,14 +57,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Math\MatrixSpecs\When_comparing_two_matrices.cs" />
+    <Compile Include="Math\VectorSpecs\Constants.cs" />
+    <Compile Include="Math\VectorSpecs\CrossProduct.cs" />
+    <Compile Include="Math\VectorSpecs\DotProduct.cs" />
     <Compile Include="EqualitySpecs.cs" />
     <Compile Include="Geometry\SphereSpecs.cs" />
-    <Compile Include="Math\MatrixSpecs.cs" />
-    <Compile Include="PointSpecs.cs" />
+    <Compile Include="Math\MatrixSpecs\MatrixHelper.cs" />
+    <Compile Include="Math\VectorSpecs\IsUnit.cs" />
+    <Compile Include="Math\VectorSpecs\Length.cs" />
+    <Compile Include="Math\VectorSpecs\OpAddition.cs" />
+    <Compile Include="Math\VectorSpecs\OpMultiplication.cs" />
+    <Compile Include="Math\VectorSpecs\OpSubtraction.cs" />
+    <Compile Include="Math\VectorSpecs\SquaredLength.cs" />
+    <Compile Include="Math\VectorSpecs\ToUnitVector.cs" />
+    <Compile Include="Math\MatrixSpecs\When_calculating_the_determinant_of_a_matrix.cs" />
+    <Compile Include="Math\MatrixSpecs\When_transposing_a_matrix.cs" />
+    <Compile Include="Math\MatrixSpecs\When_cloning_a_matrix.cs" />
+    <Compile Include="Math\MatrixSpecs\When_constructing_a_matrix_from_an_enumerable.cs" />
+    <Compile Include="Math\MatrixSpecs\When_constructing_a_matrix_from_a_multidimensional_array.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RaySpecs.cs" />
-    <Compile Include="RendererSpecs.cs" />
-    <Compile Include="VectorSpecs.cs" />
+    <Compile Include="Math\RaySpecs\When_constructing_a_ray.cs" />
+    <Compile Include="Math\VectorSpecs\OpDivision.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kelly\Kelly.csproj">

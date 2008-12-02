@@ -1,20 +1,20 @@
 using Kelly.Math;
 using Xunit;
 
-namespace Kelly.Specs.Math {
-	public partial class MatrixSpecs {
+namespace Kelly.Specs.Math.MatrixSpecs {
+	public class When_calculating_the_determinant_of_a_matrix {
 		[Fact]
-		public void Determinant_of_zero_matrix_should_be_zero() {
+		public void The_detereminant_of_the_zero_matrix_is_zero() {
 			Assert.Equal(0f, Matrix.Zero.CalculateDeterminant());
 		}
 
 		[Fact]
-		public void Determinant_of_identity_matrix_should_be_one() {
+		public void The_determinant_of_the_identity_matrix_is_one() {
 			Assert.Equal(1f, Matrix.Identity.CalculateDeterminant());
 		}
 
 		[Fact]
-		public void Determinant_of_matrix_with_a_zero_row_should_be_zero() {
+		public void The_determinant_of_a_matrix_with_a_zero_row_is_zero() {
 			Assert.Equal(0f,
 			             new Matrix(
 			             	0f, 0f, 0f, 0f,
@@ -24,7 +24,7 @@ namespace Kelly.Specs.Math {
 		}
 
 		[Fact]
-		public void Determinant_of_matrix_with_two_equal_rows_should_be_zero() {
+		public void The_determinant_of_a_matrix_with_two_identical_rows_is_zero() {
 			Assert.Equal(0f,
 			             new Matrix(
 			             	1f, 1f, 1f, 1f,
@@ -34,7 +34,7 @@ namespace Kelly.Specs.Math {
 		}
 
 		[Fact]
-		public void Determinant_of_matrix_with_two_equal_columns_should_be_zero() {
+		public void The_determinant_of_a_matrix_with_two_identical_columns_is_zero() {
 			Assert.Equal(0f,
 			             new Matrix(
 			             	1f, 1f, 0f, 0f,
@@ -44,7 +44,7 @@ namespace Kelly.Specs.Math {
 		}
 
 		[Fact]
-		public void Determinant_of_scaling_matrix_should_equal_all_of_the_axis_scalars_multiplied_together() {
+		public void The_determinant_of_a_scaling_matrix_equals_the_axis_scalars_multiplied_together() {
 			Assert.Equal(0f, Matrix.Scaling(0, 1, 1).CalculateDeterminant());
 			Assert.Equal(0f, Matrix.Scaling(1, 0, 1).CalculateDeterminant());
 			Assert.Equal(0f, Matrix.Scaling(1, 1, 0).CalculateDeterminant());

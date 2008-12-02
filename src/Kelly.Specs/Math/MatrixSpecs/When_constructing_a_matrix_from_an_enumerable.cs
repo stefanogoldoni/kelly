@@ -3,8 +3,8 @@ using System.Linq;
 using Kelly.Math;
 using Xunit;
 
-namespace Kelly.Specs.Math {
-	public partial class MatrixSpecs {
+namespace Kelly.Specs.Math.MatrixSpecs {
+	public class When_constructing_a_matrix_from_an_enumerable {
 		[Fact]
 		public void An_ArgumentException_is_thrown_if_the_enumerable_contains_less_than_16_elements() {
 			Assert.Throws(typeof(ArgumentException), () => {
