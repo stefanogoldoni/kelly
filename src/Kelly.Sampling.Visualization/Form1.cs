@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Castle.Core;
 using Kelly.Math;
 using Castle.Windsor;
+using Kelly.Random;
 
 namespace Kelly.Sampling.Visualization {
 	public partial class Form1 : Form {

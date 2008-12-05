@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Kelly.Math;
+using Kelly.Random;
 
 namespace Kelly.Sampling {
 	public class RandomSampleGenerator : ISampleGenerator {
