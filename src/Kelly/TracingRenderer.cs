@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FrigginAwesome;
 using Kelly.Math;
+using Kelly.Sampling;
 
 namespace Kelly {
 	public class TracingRenderer : IRenderer {

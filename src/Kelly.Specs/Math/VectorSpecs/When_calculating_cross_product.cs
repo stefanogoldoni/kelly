@@ -2,9 +2,9 @@ using Kelly.Math;
 using Xunit;
 
 namespace Kelly.Specs.Math.VectorSpecs {
-	public class CrossProduct {
+	public class When_calculating_the_cross_product_of_two_vectors {
 		[Fact]
-		public void SatisfiesUnitVectorInvariants() {
+		public void Unit_vector_invariants_are_satisfied() {
 			Assert.Equal(
 				Vector.UnitX,
 				Vector.CrossProduct(Vector.UnitY, Vector.UnitZ));
@@ -19,7 +19,7 @@ namespace Kelly.Specs.Math.VectorSpecs {
 		}
 
 		[Fact]
-		public void IsAntiCommutative() {
+		public void Cross_product_is_anticommutative() {
 			var a = new Vector(1, 2, 3);
 			var b = new Vector(6, 4, 5);
 
@@ -27,7 +27,7 @@ namespace Kelly.Specs.Math.VectorSpecs {
 		}
 
 		[Fact]
-		public void ReturnsVectorThatHasADotProductOfZeroWithBothInputVectors() {
+		public void The_resulting_vector_has_a_dot_product_of_zero_with_both_input_vectors() {
 			var a = new Vector(2, 3, 4);
 			var b = new Vector(4, 5, 6);
 
@@ -38,7 +38,7 @@ namespace Kelly.Specs.Math.VectorSpecs {
 		}
 
 		[Fact]
-		public void ReturnsZeroVectorWhenInputVectorsHaveSameDirection() {
+		public void If_the_two_input_vectors_have_the_same_direction_the_result_is_the_zero_vector() {
 			Assert.Equal(
 				Vector.Zero,
 				Vector.CrossProduct(Vector.UnitX, Vector.UnitX));
@@ -53,7 +53,7 @@ namespace Kelly.Specs.Math.VectorSpecs {
 		}
 
 		[Fact]
-		public void ReturnsVectorWithLengthThatIsTheProductOfTheLengthsOfTheTwoInputVectors() {
+		public void The_length_of_the_resulting_vectors_equals_the_product_of_the_lengths_of_the_two_input_vectors() {
 			Assert.Equal(
 				10f,
 				Vector.CrossProduct(new Vector(2, 0, 0), new Vector(0, 5, 0)).Length);

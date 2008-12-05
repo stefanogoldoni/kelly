@@ -1,5 +1,5 @@
 ﻿
-namespace Kelly.Math {
+namespace Kelly {
 	public interface IRandomNumberGenerator {
 		float Next();
 	}

@@ -2,9 +2,9 @@ using Kelly.Math;
 using Xunit;
 
 namespace Kelly.Specs.Math.VectorSpecs {
-	public class OpSubtraction {
+	public class When_subtracting_two_vectors {
 		[Fact]
-		public void ReturnsDifferenceOfTwoVectors() {
+		public void The_result_is_the_difference_of_the_two_vectors() {
 			Assert.Equal(
 				new Vector(1f, 0, -1f),
 				Vector.UnitX - Vector.UnitZ);
