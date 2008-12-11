@@ -4,7 +4,7 @@ using Kelly.Math;
 
 namespace Kelly.Specs.Math.MatrixSpecs {
 	public class When_comparing_two_matrices : EqualitySpecs<Matrix> {
-		private static readonly Random _rng = new Random();
+		private static readonly System.Random _rng = new System.Random();
 		
 		protected override Matrix GetRandomInstance() {
 			return new Matrix(

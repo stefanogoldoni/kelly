@@ -26,6 +26,7 @@
 			this._image = new System.Windows.Forms.PictureBox();
 			this._sampleGenerators = new System.Windows.Forms.ComboBox();
 			this._randomNumberGenerators = new System.Windows.Forms.ComboBox();
+			this._regenerate = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this._image)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -53,11 +54,22 @@
 			this._randomNumberGenerators.Size = new System.Drawing.Size(299, 21);
 			this._randomNumberGenerators.TabIndex = 2;
 			// 
+			// _regenerate
+			// 
+			this._regenerate.Location = new System.Drawing.Point(12, 69);
+			this._regenerate.Name = "_regenerate";
+			this._regenerate.Size = new System.Drawing.Size(75, 23);
+			this._regenerate.TabIndex = 3;
+			this._regenerate.Text = "Regenerate";
+			this._regenerate.UseVisualStyleBackColor = true;
+			this._regenerate.Click += new System.EventHandler(this._regenerate_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(326, 465);
+			this.Controls.Add(this._regenerate);
 			this.Controls.Add(this._randomNumberGenerators);
 			this.Controls.Add(this._sampleGenerators);
 			this.Controls.Add(this._image);
@@ -73,6 +85,7 @@
 		private System.Windows.Forms.PictureBox _image;
 		private System.Windows.Forms.ComboBox _sampleGenerators;
 		private System.Windows.Forms.ComboBox _randomNumberGenerators;
+		private System.Windows.Forms.Button _regenerate;
 
 	}
 }

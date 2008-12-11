@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -16,7 +17,7 @@ namespace Kelly.Sampling.Visualization {
 			InitializeComponent();
 
 			var generatorImplementations = GetSampleGeneratorImplementations().ToArray();
-			_sampleGenerators.DataSource = generatorImplementations.Select(type => type.Name).ToArray();
+			_sampleGenerators.DataSource = generatorImplementations.Select(type => type.FullName).ToArray();
 
 			_image.Image = new Bitmap(_image.Width, _image.Height);
 
@@ -26,12 +27,16 @@ namespace Kelly.Sampling.Visualization {
 				IoC.AddComponent(generator.FullName, typeof(ISampleGenerator), generator);
 			}
 
-			IoC.Kernel.AddComponent("IRandomNumberGenerator", typeof (IRandomNumberGenerator), typeof (NaiveRandomNumberGenerator), LifestyleType.Transient);
 
-			RenderSamples(IoC.Resolve<ISampleGenerator>("Kelly.Sampling.RandomSampleGenerator"), 1000, _image.Image);
+			var rngImplementations = GetRngImplementations();
+			foreach(var rng in rngImplementations) {
+				IoC.AddComponent(rng.FullName, typeof (IRandomNumberGenerator), rng);
+			}
+
+			_randomNumberGenerators.DataSource = rngImplementations.Select(type => type.FullName);
 		}
 
-		static void RenderSamples(ISampleGenerator generator, int count, Image target) {
+		private static void RenderSamples(ISampleGenerator generator, int count, Image target) {
 			using (var graphics = Graphics.FromImage(target)) {
 				graphics.FillRectangle(Brushes.Black, 0, 0, target.Width, target.Height);
 
@@ -41,10 +46,26 @@ namespace Kelly.Sampling.Visualization {
 			}
 		}
 
-		static IEnumerable<Type> GetSampleGeneratorImplementations() {
+		private static IEnumerable<Type> GetSampleGeneratorImplementations() {
 			return from type in typeof (ISampleGenerator).Assembly.GetTypes()
 			       where !type.IsAbstract && typeof (ISampleGenerator).IsAssignableFrom(type)
 			       select type;
+		}
+
+		private static IEnumerable<Type> GetRngImplementations() {
+			return from type in typeof(IRandomNumberGenerator).Assembly.GetTypes()
+				   where !type.IsAbstract && typeof(IRandomNumberGenerator).IsAssignableFrom(type)
+				   select type;			
+		}
+
+		private void Regenerate() {
+			RenderSamples(IoC.Resolve<ISampleGenerator>((string)_sampleGenerators.SelectedValue), 1000, _image.Image);
+
+			_image.Invalidate();
+		}
+
+		private void _regenerate_Click(object sender, EventArgs e) {
+			Regenerate();
 		}
 	}
 }

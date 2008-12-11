@@ -1,5 +1,11 @@
-﻿namespace Kelly.Random {
+﻿using System;
+
+namespace Kelly.Random {
 	public class MerseneTwisterRandomNumberGenerator : IRandomNumberGenerator {
+		public MerseneTwisterRandomNumberGenerator() {
+			Init((uint)DateTime.Now.Ticks);
+		}
+
 		private const int StateSize = 624;
 		private const int M = 397;
 
@@ -8,15 +14,14 @@
 		private const uint LOWER_MASK = 0x7fffffff;	/* least significant r bits */
 
 		private readonly uint[] _state = new uint[StateSize];	/* the array for the state vector  */
-		private uint _index = StateSize + 1;			/* mti==N+1 means mt[N] is not initialized */
-		private bool _isInitialized;
+		private uint _index;
 
 		/* initializes mt[N] with a seed */
 		private void Init(uint seed) {
 			_state[0] = seed;
 
-			for(_index = 1; _index < StateSize; _index++) {
-				_state[_index] = (uint) (1812433253UL * (_state[_index - 1] ^ (_state[_index - 1] >> 30)) + _index);
+			for(var i = 1u; i < StateSize; i++) {
+				_state[i] = (uint) (1812433253UL * (_state[i - 1] ^ (_state[i - 1] >> 30)) + i);
 			}
 		}
 
@@ -33,8 +38,7 @@
 			for (; kk < StateSize - 1; kk++) {
 				var y = (_state[kk] & UPPER_MASK) | (_state[kk + 1] & LOWER_MASK);
 				_state[kk] = _state[kk + (M - StateSize)] ^ (y >> 1) ^ _magic[y & 0x1UL];
-			}
-			
+			}			
 		}
 
 		/* generates a random number on [0,0xffffffff]-interval */
