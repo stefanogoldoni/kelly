@@ -67,6 +67,7 @@
     <Compile Include="Math\VectorSpecs\The_IsUnit_property.cs" />
     <Compile Include="Math\VectorSpecs\The_Length_property.cs" />
     <Compile Include="Math\VectorSpecs\When_adding_two_vectors.cs" />
+    <Compile Include="Math\VectorSpecs\When_comparing_two_vectors.cs" />
     <Compile Include="Math\VectorSpecs\When_multiplying_a_vector_by_a_scalar.cs" />
     <Compile Include="Math\VectorSpecs\When_subtracting_two_vectors.cs" />
     <Compile Include="Math\VectorSpecs\The_SquaredLength_property.cs" />

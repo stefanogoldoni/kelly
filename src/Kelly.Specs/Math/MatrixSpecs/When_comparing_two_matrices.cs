@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Kelly.Math;
 
@@ -16,13 +15,10 @@ namespace Kelly.Specs.Math.MatrixSpecs {
 		protected override Matrix[] GetRandomInstancesThatAreEqual(int count) {
 			var instance = GetRandomInstance();
 
-			var array = new Matrix[count];
-
-			for (var i = 0; i < array.Length; i++) {
-				array[i] = instance.Clone();
-			}
-
-			return array;
+			return Enumerable
+				.Range(0, count)
+				.Select(i => instance.Clone())
+				.ToArray();
 		}
 	}
 }

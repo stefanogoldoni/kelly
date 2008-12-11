@@ -24,7 +24,7 @@ namespace Kelly.Specs {
 		}
 
 		[Fact]
-		public void If_X_doesnt_equal_Y_then_Y_doesnt_equal_X() {
+		public void Inequality_is_symmetric() {
 			var x = GetRandomInstance();
 			var y = GetRandomInstance();
 
