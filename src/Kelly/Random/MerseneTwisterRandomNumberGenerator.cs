@@ -1,43 +1,43 @@
 ﻿using System;
 
 namespace Kelly.Random {
-	public class MerseneTwisterRandomNumberGenerator : IRandomNumberGenerator {
-		public MerseneTwisterRandomNumberGenerator() {
-			Init((uint)DateTime.Now.Ticks);
+	public class MersenneTwisterRandomNumberGenerator : IRandomNumberGenerator {
+		public MersenneTwisterRandomNumberGenerator() : this(Environment.TickCount) {
 		}
 
-		private const int StateSize = 624;
-		private const int M = 397;
+		public MersenneTwisterRandomNumberGenerator(int seed) {
+			State = new uint[624];
 
-		private const uint MATRIX_A = 0x9908b0df;	/* constant vector a */
-		private const uint UPPER_MASK = 0x80000000;	/* most significant w-r bits */
-		private const uint LOWER_MASK = 0x7fffffff;	/* least significant r bits */
+			Init((uint)seed);
+		}
 
-		private readonly uint[] _state = new uint[StateSize];	/* the array for the state vector  */
-		private uint _index;
+		private static uint UpperBit(uint value) {
+			return value & 0x80000000;
+		}
 
-		/* initializes mt[N] with a seed */
+		private static uint LowerBits(uint value) {
+			return value & 0x7fffffff;
+		}
+
+		protected uint[] State { get; private set; } /* the array for the state vector  */
+		private int _index;
+
 		private void Init(uint seed) {
-			_state[0] = seed;
-
-			for(var i = 1u; i < StateSize; i++) {
-				_state[i] = (uint) (1812433253UL * (_state[i - 1] ^ (_state[i - 1] >> 30)) + i);
+			State[0] = seed;
+			for(var i = 1u; i < State.Length; i++) {
+				State[i] = (uint)(1812433253UL * (State[i - 1] ^ (State[i - 1] >> 30)) + i);
 			}
 		}
 
-		private static readonly uint[] _magic = new[] {0u, MATRIX_A};
+		protected virtual void GenerateNumbers() {
+			for (var i = 0; i < State.Length; i++) {
+				var y = UpperBit(State[i]) + LowerBits(State[(i + 1) % State.Length]);
 
-		private void GenerateNumbers() {
-			uint kk;
+				State[i] = State[(i + 397) % State.Length] ^ (y >> 1);
 
-			for (kk = 0; kk < StateSize - M; kk++) {
-				var y = (_state[kk] & UPPER_MASK) | (_state[kk + 1] & LOWER_MASK);
-				_state[kk] = _state[kk + M] ^ (y >> 1) ^ _magic[y & 0x1];
-			}
-
-			for (; kk < StateSize - 1; kk++) {
-				var y = (_state[kk] & UPPER_MASK) | (_state[kk + 1] & LOWER_MASK);
-				_state[kk] = _state[kk + (M - StateSize)] ^ (y >> 1) ^ _magic[y & 0x1UL];
+				if (y.IsEven()) {
+					State[i] ^= 0x9908b0df;
+				}
 			}			
 		}
 
@@ -47,8 +47,8 @@ namespace Kelly.Random {
 				GenerateNumbers();
 			}
 
-			var value = _state[_index];
-			_index = (_index + 1) % StateSize;
+			var value = State[_index];
+			_index = (_index + 1) % State.Length;
 
 			return Temper(value);
 		}
@@ -99,39 +99,5 @@ namespace Kelly.Random {
 //    unsigned long a=genrand_int32()>>5, b=genrand_int32()>>6; 
 //    return(a*67108864.0+b)*(1.0/9007199254740992.0); 
 //} 
-
-		//public MerseneTwisterRandomNumberGenerator() {
-		//    _state = new int[624];
-		//    _index = 0;
-
-		//    Initialize(1337);
-		//}
-
-		//private const uint UpperMask = 0x80000000;
-		//private const uint LowerMask = 0x7fffffff;
-
-		//private readonly uint[] _state;
-		//private uint _index;
-
-		//private void Initialize(int seed) {
-		//    _state[0] = seed;
-
-		//    for(var i = 1; i < _state.Length; i++) {
-		//        var newState = 1812433253L * (_state[i - 1] ^ (_state[i - 1] >> 30 + i));
-		//        _state[i] = (int) (newState & 0x00000000ffffffff);	// extract last 32 bits from newState
-		//    }
-		//}
-
-		//private void GenerateNumbers() {
-		//    for(var i = 0; i < _state.Length - 1; i++) {
-		//        var y = (_state[i] & UpperMask) + (_state[i+1] & 0x7fffffff);
-
-		//        _state[i] = _state[(i + 397) % _state.Length] ^ (y >> 1);
-		//    }
-		//}
-
-		//public float Next() {
-		//    throw new System.NotImplementedException();
-		//}
 	}
 }

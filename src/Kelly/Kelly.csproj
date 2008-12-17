@@ -55,6 +55,7 @@
     <Compile Include="Imaging\BitmapImage.cs" />
     <Compile Include="Imaging\ColorExtensions.cs" />
     <Compile Include="Imaging\IImage.cs" />
+    <Compile Include="IntegerExtensions.cs" />
     <Compile Include="Random\MerseneTwisterRandomNumberGenerator.cs" />
     <Compile Include="Sampling\ISampleGenerator.cs" />
     <Compile Include="ITracingAlgorithm.cs" />
@@ -62,7 +63,7 @@
     <Compile Include="Random\IRandomNumberGenerator.cs" />
     <Compile Include="Math\Matrix.cs" />
     <Compile Include="Math\MatrixExtensions.cs" />
-    <Compile Include="Random\NaiveRandomNumberGenerator.cs" />
+    <Compile Include="Random\SystemRandomNumberGenerator.cs" />
     <Compile Include="Math\Point.cs" />
     <Compile Include="Math\Point2.cs" />
     <Compile Include="Math\Ray.cs" />

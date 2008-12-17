@@ -3,16 +3,19 @@
 namespace Kelly.Console {
 	class Program {
 		static void Main(string[] args) {
-			var container = new WindsorContainer();
+			int x = -1;
+			System.Console.WriteLine(unchecked((uint)(-1)));
 
-			container.AddComponent("renderer", typeof (IRenderer), typeof (TracingRenderer));
-			container.AddComponent("tracingAlgorithm", typeof (ITracingAlgorithm), typeof (DebugTracingAlgorithm));
+			//var container = new WindsorContainer();
 
-			var renderer = container.GetService<IRenderer>();
+			//container.AddComponent("renderer", typeof (IRenderer), typeof (TracingRenderer));
+			//container.AddComponent("tracingAlgorithm", typeof (ITracingAlgorithm), typeof (DebugTracingAlgorithm));
 
-			var surface = new BitmapRenderTarget(40, 30);
+			//var renderer = container.GetService<IRenderer>();
 
-			renderer.RenderScene(surface, null, null);
+			//var surface = new BitmapRenderTarget(40, 30);
+
+			//renderer.RenderScene(surface, null, null);
 		}
 	}
 }
