@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using Kelly.Math;
 
 namespace Kelly.Sampling.Visualization {
 	static class Program {

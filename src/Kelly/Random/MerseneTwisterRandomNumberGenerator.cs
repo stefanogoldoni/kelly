@@ -56,7 +56,7 @@ namespace Kelly.Random {
 		private static uint Temper(uint value) {
 			value ^= (value >> 11);
 			value ^= (value << 7) & 0x9d2c5680;
-			value ^= (value >> 15) & 0xefc60000;
+			value ^= (value << 15) & 0xefc60000;
 			value ^= (value >> 18);
 
 			return value;
