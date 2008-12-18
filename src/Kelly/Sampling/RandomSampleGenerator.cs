@@ -13,7 +13,7 @@ namespace Kelly.Sampling {
 
 		public IEnumerable<Point2> GenerateSamples(int count) {
 			return from x in Enumerable.Range(0, count)
-			       select new Point2(_rng.Next(), _rng.Next());
+			       select _rng.NextPoint2();
 		}
 	}
 }

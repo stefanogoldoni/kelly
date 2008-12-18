@@ -56,8 +56,11 @@
     <Compile Include="Imaging\ColorExtensions.cs" />
     <Compile Include="Imaging\IImage.cs" />
     <Compile Include="IntegerExtensions.cs" />
+    <Compile Include="Math\Vector2.cs" />
     <Compile Include="OrthogonalCamera.cs" />
+    <Compile Include="RandomNumberGeneratorExtensions.cs" />
     <Compile Include="Random\MerseneTwisterRandomNumberGenerator.cs" />
+    <Compile Include="Sampling\CenterBiasedSampleGenerator.cs" />
     <Compile Include="Sampling\ISampleGenerator.cs" />
     <Compile Include="ITracingAlgorithm.cs" />
     <Compile Include="Materials\IMaterial.cs" />
@@ -76,6 +79,8 @@
     <Compile Include="RenderableGeometry.cs" />
     <Compile Include="RenderTargetExtensions.cs" />
     <Compile Include="Sampling\RandomSampleGenerator.cs" />
+    <Compile Include="Sampling\StratifiedRandomSampleGenerator.cs" />
+    <Compile Include="Sampling\StratifiedSampleGenerator.cs" />
     <Compile Include="SimpleCamera.cs" />
     <Compile Include="TracingRenderer.cs" />
   </ItemGroup>
