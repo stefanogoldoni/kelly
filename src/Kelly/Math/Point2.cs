@@ -10,6 +10,14 @@ namespace Kelly.Math {
 		public float X { get; private set; }
 		public float Y { get; private set; }
 
+		public static float DistanceBetween(Point2 x, Point2 y) {
+			return (x - y).Length;
+		}
+
+		public static Vector2 operator-(Point2 left, Point2 right) {
+			return new Vector2(left.X - right.X, left.Y - right.Y);
+		}
+
 		public static Point2 operator +(Point2 left, Vector2 right) {
 			return new Point2(left.X + right.X, left.Y + right.Y);
 		}
@@ -33,5 +41,7 @@ namespace Kelly.Math {
 				}
 			}
 		}
+
+		public static readonly Point2 Zero = new Point2(0, 0);
 	}
 }

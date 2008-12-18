@@ -32,9 +32,13 @@
 			this.sampleGenerators = new System.Windows.Forms.ComboBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.centerBiasDisplay = new System.Windows.Forms.Label();
+			this.centerBiasSlider = new System.Windows.Forms.TrackBar();
+			this.label4 = new System.Windows.Forms.Label();
 			this.biasTowardsCenter = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.imageContainer)).BeginInit();
 			this.groupBox1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.centerBiasSlider)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// imageContainer
@@ -47,7 +51,7 @@
 			// 
 			// regenerate
 			// 
-			this.regenerate.Location = new System.Drawing.Point(8, 161);
+			this.regenerate.Location = new System.Drawing.Point(8, 254);
 			this.regenerate.Name = "regenerate";
 			this.regenerate.Size = new System.Drawing.Size(167, 23);
 			this.regenerate.TabIndex = 1;
@@ -110,6 +114,9 @@
 			// groupBox1
 			// 
 			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox1.Controls.Add(this.centerBiasDisplay);
+			this.groupBox1.Controls.Add(this.centerBiasSlider);
+			this.groupBox1.Controls.Add(this.label4);
 			this.groupBox1.Controls.Add(this.biasTowardsCenter);
 			this.groupBox1.Controls.Add(this.label3);
 			this.groupBox1.Controls.Add(this.regenerate);
@@ -120,10 +127,38 @@
 			this.groupBox1.Controls.Add(this.randomNumberGenerators);
 			this.groupBox1.Location = new System.Drawing.Point(532, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(239, 196);
+			this.groupBox1.Size = new System.Drawing.Size(239, 313);
 			this.groupBox1.TabIndex = 8;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Options";
+			// 
+			// centerBiasDisplay
+			// 
+			this.centerBiasDisplay.AutoSize = true;
+			this.centerBiasDisplay.Location = new System.Drawing.Point(75, 163);
+			this.centerBiasDisplay.Name = "centerBiasDisplay";
+			this.centerBiasDisplay.Size = new System.Drawing.Size(22, 13);
+			this.centerBiasDisplay.TabIndex = 12;
+			this.centerBiasDisplay.Text = "1.0";
+			// 
+			// centerBiasSlider
+			// 
+			this.centerBiasSlider.Location = new System.Drawing.Point(6, 178);
+			this.centerBiasSlider.Maximum = 500;
+			this.centerBiasSlider.Name = "centerBiasSlider";
+			this.centerBiasSlider.Size = new System.Drawing.Size(227, 42);
+			this.centerBiasSlider.TabIndex = 11;
+			this.centerBiasSlider.TickFrequency = 10;
+			this.centerBiasSlider.Value = 100;
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(7, 162);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(68, 13);
+			this.label4.TabIndex = 9;
+			this.label4.Text = "Bias amount:";
 			// 
 			// biasTowardsCenter
 			// 
@@ -147,6 +182,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.imageContainer)).EndInit();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.centerBiasSlider)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -163,6 +199,9 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.CheckBox biasTowardsCenter;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.TrackBar centerBiasSlider;
+		private System.Windows.Forms.Label centerBiasDisplay;
 
 
 	}

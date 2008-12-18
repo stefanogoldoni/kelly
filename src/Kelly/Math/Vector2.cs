@@ -11,5 +11,13 @@
 		public static Vector2 operator *(Vector2 vector, float scalar) {
 			return new Vector2(vector.X * scalar, vector.Y * scalar);
 		}
+
+		public float SquaredLength {
+			get { return X * X + Y * Y; }
+		}
+
+		public float Length {
+			get { return (float)System.Math.Sqrt(SquaredLength); }
+		}
 	}
 }

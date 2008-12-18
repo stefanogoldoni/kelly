@@ -15,8 +15,22 @@ namespace Kelly.Sampling.Visualization {
 			sampleGenerators.DataSource = GetInterfaceImplementations<ISampleGenerator>();
 
 			regenerate.Click += WhenRegenerateClicked;
+
+			centerBiasSlider.Maximum = MaxCenterBias * CenterBiasGranularity;
+			centerBiasSlider.ValueChanged += new EventHandler(BiasAmountChanged);
+
 			RenderSamples();
 		}
+
+		private void BiasAmountChanged(object sender, EventArgs e) {
+			centerBiasDisplay.Text = CenterBiasAmount.ToString();
+
+			if (biasTowardsCenter.Checked)
+				RenderSamples();
+		}
+
+		private const int MaxCenterBias = 5;
+		private const int CenterBiasGranularity = 100;
 
 		private static IList<Type> GetInterfaceImplementations<TInterface>() {
 			return (from t in typeof(TInterface).Assembly.GetTypes()
@@ -37,8 +51,19 @@ namespace Kelly.Sampling.Visualization {
 
 				graphics.FillRectangle(Brushes.Black, 0, 0, target.Width, target.Height);
 
+				//graphics.FillRectangles(
+				//    Brushes.White, 
+				//    generator.GenerateSamples(SampleCount)
+				//        .Select(point => new RectangleF(point.X * (target.Width - 1), point.Y * (target.Height - 1), 2, 2))
+				//        .ToArray());
+
 				foreach (var point in generator.GenerateSamples(SampleCount)) {
-					graphics.FillEllipse(Brushes.White, point.X * (target.Width - 1), point.Y * (target.Height - 1), 5, 5);
+				    graphics.FillEllipse(
+						Brushes.White, 
+						point.X * (target.Width - 1), 
+						point.Y * (target.Height - 1), 
+						5, 
+						5);
 				}
 			}
 
@@ -54,6 +79,12 @@ namespace Kelly.Sampling.Visualization {
 				int count;
 				int.TryParse(sampleCount.Text, out count);
 				return count;
+			}
+		}
+
+		private float CenterBiasAmount {
+			get {
+				return centerBiasSlider.Value / (float)CenterBiasGranularity;
 			}
 		}
 
@@ -80,7 +111,7 @@ namespace Kelly.Sampling.Visualization {
 			var generator = (ISampleGenerator)Activator.CreateInstance((Type)sampleGenerators.SelectedValue, parameters);
 
 			return biasTowardsCenter.Checked
-				? new CenterBiasedSampleGenerator(generator) 
+				? new CenterBiasedSampleGenerator(generator, CenterBiasAmount) 
 				: generator;
 		}
 	}
