@@ -56,6 +56,7 @@
     <Compile Include="Imaging\ColorExtensions.cs" />
     <Compile Include="Imaging\IImage.cs" />
     <Compile Include="IntegerExtensions.cs" />
+    <Compile Include="OrthogonalCamera.cs" />
     <Compile Include="Random\MerseneTwisterRandomNumberGenerator.cs" />
     <Compile Include="Sampling\ISampleGenerator.cs" />
     <Compile Include="ITracingAlgorithm.cs" />

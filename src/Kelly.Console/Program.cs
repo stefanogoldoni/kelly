@@ -1,21 +1,29 @@
-﻿using Castle.Windsor;
+﻿using System.Collections;
+using Castle.Windsor;
+using Kelly.Geometry;
+using Kelly.Math;
+using Kelly.Random;
+using Kelly.Sampling;
 
 namespace Kelly.Console {
 	class Program {
 		static void Main(string[] args) {
-			int x = -1;
-			System.Console.WriteLine(unchecked((uint)(-1)));
+			var container = new WindsorContainer();
 
-			//var container = new WindsorContainer();
+			container.AddComponent("tracingAlgorithm", typeof(ITracingAlgorithm), typeof(DebugTracingAlgorithm));
+			container.AddComponent("rng", typeof (IRandomNumberGenerator), typeof (MersenneTwisterRandomNumberGenerator));
+			container.AddComponent("sampler", typeof (ISampleGenerator), typeof (RandomSampleGenerator));
 
-			//container.AddComponent("renderer", typeof (IRenderer), typeof (TracingRenderer));
-			//container.AddComponent("tracingAlgorithm", typeof (ITracingAlgorithm), typeof (DebugTracingAlgorithm));
+			container.AddComponent("renderer", typeof (IRenderer), typeof (TracingRenderer));
+			var renderer = container.Resolve<IRenderer>(new { samplesPerPixel = 1 });
 
-			//var renderer = container.GetService<IRenderer>();
+			var surface = new BitmapRenderTarget(40, 30);
+			var scene = new Sphere(Point.Zero, 1);
+			var camera = new OrthogonalCamera(new Point(0, 0, 10), -Vector.UnitZ, Vector.UnitY, 4, 4);
 
-			//var surface = new BitmapRenderTarget(40, 30);
+			renderer.RenderScene(surface, camera, scene);
 
-			//renderer.RenderScene(surface, null, null);
+			surface.Bitmap.Save("output.bmp");
 		}
 	}
 }

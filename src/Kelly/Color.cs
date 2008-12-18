@@ -9,6 +9,7 @@ namespace Kelly {
 
 		public float R, G, B;
 
-		public static readonly Color Black = new Color(0f, 0f, 0f);
+		public static readonly Color Black = new Color(0, 0, 0);
+		public static readonly Color White = new Color(1, 1, 1);
 	}
 }

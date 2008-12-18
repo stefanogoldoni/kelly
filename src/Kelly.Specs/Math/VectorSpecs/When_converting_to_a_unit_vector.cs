@@ -1,10 +1,18 @@
+using System;
 using Kelly.Math;
 using Xunit;
 
 namespace Kelly.Specs.Math.VectorSpecs {
 	public class When_converting_to_a_unit_vector {
 		[Fact]
-		public void The_result_is_a_unit_vector() {
+		public void The_zero_vector_results_in_a_NaN_vector() {
+			Assert.Equal(
+				new Vector(float.NaN, float.NaN, float.NaN), 
+				Vector.Zero.ToUnitVector());
+		}
+
+		[Fact]
+		public void The_result_for_a_nonzero_vector_is_a_unit_vector() {
 			Assert.True(new Vector(7, 0, 0).ToUnitVector().IsUnit);
 			Assert.True(new Vector(0, 7, 0).ToUnitVector().IsUnit);
 			Assert.True(new Vector(0, 0, 7).ToUnitVector().IsUnit);

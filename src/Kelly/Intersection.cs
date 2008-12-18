@@ -24,7 +24,9 @@ namespace Kelly {
 
 		public Color Color {
 			get {
-				return Material.GetColorAt(Point);
+				return Material == null
+				       	? Color.White
+				       	: Material.GetColorAt(Point);
 			}
 		}
 
