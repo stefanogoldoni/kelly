@@ -14,19 +14,28 @@ namespace Kelly.Sampling.Visualization {
 			randomNumberGenerators.DataSource = GetInterfaceImplementations<IRandomNumberGenerator>();
 			sampleGenerators.DataSource = GetInterfaceImplementations<ISampleGenerator>();
 
-			regenerate.Click += WhenRegenerateClicked;
-
 			centerBiasSlider.Maximum = MaxCenterBias * CenterBiasGranularity;
-			centerBiasSlider.ValueChanged += new EventHandler(BiasAmountChanged);
 
+			centerBiasSlider.ValueChanged += BiasAmountChanged;
+
+			SetupRenderEvents();
+			RenderSamples();
+		}
+
+		private void SetupRenderEvents() {
+			randomNumberGenerators.ValueMemberChanged += WhenNeedsRender;
+			sampleGenerators.ValueMemberChanged += WhenNeedsRender;
+			centerBiasSlider.ValueChanged += WhenNeedsRender;
+			regenerate.Click += WhenNeedsRender;
+			biasTowardsCenter.CheckStateChanged += WhenNeedsRender;
+		}
+
+		private void WhenNeedsRender(object sender, EventArgs args) {
 			RenderSamples();
 		}
 
 		private void BiasAmountChanged(object sender, EventArgs e) {
 			centerBiasDisplay.Text = CenterBiasAmount.ToString();
-
-			if (biasTowardsCenter.Checked)
-				RenderSamples();
 		}
 
 		private const int MaxCenterBias = 5;
@@ -36,10 +45,6 @@ namespace Kelly.Sampling.Visualization {
 			return (from t in typeof(TInterface).Assembly.GetTypes()
 					where typeof(TInterface).IsAssignableFrom(t) && !t.IsAbstract
 					select t).ToList();			
-		}
-
-		private void WhenRegenerateClicked(object sender, EventArgs e) {
-			RenderSamples();
 		}
 
 		private void RenderSamples() {

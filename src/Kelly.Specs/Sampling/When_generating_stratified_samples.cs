@@ -1,12 +1,11 @@
-﻿using System.Linq;
-using Kelly.Random;
+using System.Linq;
 using Kelly.Sampling;
 using Xunit;
 
 namespace Kelly.Specs.Sampling {
-	public class When_generating_stratified_random_samples {
+	public class When_generating_stratified_samples {
 		private static ISampleGenerator CreateGenerator() {
-			return new StratifiedRandomSampleGenerator(new SystemRandomNumberGenerator());
+			return new StratifiedSampleGenerator();
 		}
 
 		[Fact]

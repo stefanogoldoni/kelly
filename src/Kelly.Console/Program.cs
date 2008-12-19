@@ -19,7 +19,7 @@ namespace Kelly.Console {
 
 			var surface = new BitmapRenderTarget(40, 30);
 			var scene = new Sphere(Point.Zero, 1);
-			var camera = new OrthogonalCamera(new Point(0, 0, 10), -Vector.UnitZ, Vector.UnitY, 4, 4);
+			var camera = new OrthogonalCamera(new Point(0, 2, 10), -Vector.UnitZ, Vector.UnitY, 4, 4);
 
 			renderer.RenderScene(surface, camera, scene);
 

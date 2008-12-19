@@ -24,7 +24,7 @@ namespace Kelly {
 			Direction = direction.ToUnitVector();
 			
 			_right = Vector.CrossProduct(Direction, up.ToUnitVector());
-			Up = Vector.CrossProduct(direction, _right);
+			Up = Vector.CrossProduct(_right, Direction);
 
 			Width = width;
 			Height = height;

@@ -83,6 +83,7 @@
     <Compile Include="Math\RaySpecs\When_constructing_a_ray.cs" />
     <Compile Include="Math\VectorSpecs\When_dividing_a_vector_by_a_scalar.cs" />
     <Compile Include="Sampling\When_generating_stratified_random_samples.cs" />
+    <Compile Include="Sampling\When_generating_stratified_samples.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kelly\Kelly.csproj">
