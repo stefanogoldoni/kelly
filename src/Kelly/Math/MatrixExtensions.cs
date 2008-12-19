@@ -2,8 +2,11 @@
 
 namespace Kelly.Math {
 	public static class MatrixExtensions {
-		public static Matrix Inverse(this Matrix matrix) {
+		public static Matrix Invert(this Matrix matrix) {
+			var determinant = matrix.CalculateDeterminant();
+
 			throw new NotImplementedException();
+			//return 1f / determinant * matrix;
 		}
 
 		public static float CalculateDeterminant(this Matrix matrix) {

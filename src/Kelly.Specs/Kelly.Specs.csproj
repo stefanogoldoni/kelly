@@ -58,8 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Math\MatrixSpecs\When_comparing_two_matrices.cs" />
+    <Compile Include="Math\MatrixSpecs\When_inverting_a_matrix.cs" />
     <Compile Include="Math\MatrixSpecs\When_multiplying_a_matrix_by_a_matrix.cs" />
     <Compile Include="Math\MatrixSpecs\When_multiplying_a_matrix_by_a_point.cs" />
+    <Compile Include="Math\MatrixSpecs\When_multiplying_a_matrix_by_a_scalar.cs" />
     <Compile Include="Math\MatrixSpecs\When_multiplying_a_matrix_by_a_vector.cs" />
     <Compile Include="Math\VectorSpecs\For_static_members.cs" />
     <Compile Include="Math\VectorSpecs\When_calculating_cross_product.cs" />

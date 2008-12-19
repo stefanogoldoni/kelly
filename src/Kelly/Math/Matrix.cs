@@ -1,18 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
-using FrigginAwesome;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
 namespace Kelly.Math {
 	/// <summary>
-	/// Our 4x4 matrix class.
-	/// 
-	/// We represent matrices using row-major form.
+	/// Represents a row-major 4x4 matrix.
 	/// </summary>
 	[DebuggerDisplay("{ToString()}")]
-	public class Matrix {
+	public class Matrix : IEnumerable<float> {
 		private Matrix() {
 			_values = new float[4, 4];
 		}
@@ -87,6 +85,15 @@ namespace Kelly.Math {
 		public float this[int x, int y] {
 			get { return _values[x, y]; }
 			private set { _values[x, y] = value; }
+		}
+
+		public static Matrix operator *(float scalar, Matrix matrix) {
+			return matrix * scalar;
+		}
+
+		public static Matrix operator *(Matrix matrix, float scalar) {
+			return new Matrix(
+				matrix.Select(el => el * scalar));
 		}
 
 		public static Matrix operator *(Matrix left, Matrix right) {
@@ -189,12 +196,12 @@ namespace Kelly.Math {
 		}
 
 		public override bool Equals(object obj) {
-			if (object.ReferenceEquals(this, obj))
+			if (ReferenceEquals(this, obj))
 				return true;
 
 			var matrix = obj as Matrix;
 
-			if (object.ReferenceEquals(matrix, null))
+			if (ReferenceEquals(matrix, null))
 				return false;
 
 			for (var row = 0; row < 4; row++)
@@ -218,6 +225,18 @@ namespace Kelly.Math {
 
 		public Matrix Clone(){
 			return new Matrix(_values);
+		}
+
+		public IEnumerator<float> GetEnumerator() {
+			for(var row = 0; row < 4; row++) {
+				for(var col = 0; col < 4; col++) {
+					yield return this[row, col];
+				}
+			}
+		}
+
+		IEnumerator IEnumerable.GetEnumerator() {
+			return GetEnumerator();
 		}
 
 		public override string ToString() {
