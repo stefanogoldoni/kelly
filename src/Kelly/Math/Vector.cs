@@ -1,9 +1,6 @@
 ﻿using System.Diagnostics;
 
 namespace Kelly.Math {
-	/// <summary>
-	/// Our vectors always assume that w = 0.
-	/// </summary>
 	[DebuggerDisplay("({X}, {Y}, {Z})")]
 	public struct Vector {
 		public Vector(float x, float y, float z) {

@@ -1,4 +1,7 @@
-﻿namespace Kelly.Math {
+﻿using System.Diagnostics;
+
+namespace Kelly.Math {
+	[DebuggerDisplay("({X}, {Y})")]
 	public class Vector2 {
 		public Vector2(float x, float y) {
 			X = x;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FrigginAwesome;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -89,7 +90,19 @@ namespace Kelly.Math {
 		}
 
 		public static Matrix operator *(Matrix left, Matrix right) {
-			throw new NotImplementedException();
+			var result = new Matrix();
+
+			for(var row = 0; row < 4; row++) {
+				for(var col = 0; col < 4; col++) {
+					result[row, col] 
+						= left[row, 0] * right[0, col]
+						+ left[row, 1] * right[1, col]
+						+ left[row, 2] * right[2, col]
+						+ left[row, 3] * right[3, col];
+				}
+			}
+
+			return result;
 		}
 
 		public static Vector operator *(Matrix matrix, Vector vector) {
@@ -164,8 +177,8 @@ namespace Kelly.Math {
 			);
 		}
 
-		public static readonly Matrix Zero = Matrix.UniformScaling(0f);
-		public static readonly Matrix Identity = Matrix.UniformScaling(1f);
+		public static readonly Matrix Zero = new Matrix(Enumerable.Repeat(0f, 16));
+		public static readonly Matrix Identity = UniformScaling(1f);
 
 		public static bool operator ==(Matrix left, Matrix right) {
 			return left.Equals(right);

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Kelly.Math {
+	[DebuggerDisplay("({X}, {Y})")]
 	public class Point2 {
 		public Point2(float x, float y) {
 			X = x;
