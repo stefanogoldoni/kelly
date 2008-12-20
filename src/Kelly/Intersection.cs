@@ -3,17 +3,17 @@ using Kelly.Materials;
 
 namespace Kelly {
 	public class Intersection {
-		public Intersection(Ray ray, float distance) : this(ray, distance, null) {
+		public Intersection(Ray ray, double distance) : this(ray, distance, null) {
 		}
 
-		public Intersection(Ray ray, float distance, IMaterial material) {
+		public Intersection(Ray ray, double distance, IMaterial material) {
 			Ray = ray;
 			Distance = distance;
 			Material = material;
 		}
 
 		public Ray Ray { get; private set; }
-		public float Distance { get; private set; }
+		public double Distance { get; private set; }
 		public IMaterial Material { get; private set; }
 
 		public Point Point {
@@ -30,6 +30,6 @@ namespace Kelly {
 			}
 		}
 
-		public static Intersection None = new Intersection(null, float.PositiveInfinity, null);
+		public static Intersection None = new Intersection(null, double.PositiveInfinity, null);
 	}
 }

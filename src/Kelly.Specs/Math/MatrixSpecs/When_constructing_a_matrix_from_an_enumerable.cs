@@ -8,27 +8,27 @@ namespace Kelly.Specs.Math.MatrixSpecs {
 		[Fact]
 		public void An_ArgumentException_is_thrown_if_the_enumerable_contains_less_than_16_elements() {
 			Assert.Throws(typeof(ArgumentException), () => {
-			                                         	new Matrix(Enumerable.Repeat(1f, 15));
+			                                         	new Matrix(Enumerable.Repeat((double)1, 15));
 			                                         });
 		}
 
 		[Fact]
 		public void An_ArgumentException_is_thrown_if_the_enumerable_contains_more_than_16_elements() {
 			Assert.Throws(typeof(ArgumentException), () => {
-			                                         	new Matrix(Enumerable.Repeat(1f, 17));
+			                                         	new Matrix(Enumerable.Repeat((double)1, 17));
 			                                         });
 		}
 
 		[Fact]
 		public void No_exception_is_thrown_if_the_enumerable_contains_exactly_16_elements() {
 			Assert.DoesNotThrow(() => {
-			                    	new Matrix(Enumerable.Repeat(1f, 16));
+			                    	new Matrix(Enumerable.Repeat((double)1, 16));
 			                    });
 		}
 
 		[Fact]
 		public void Elements_are_assigned_in_row_major_order() {
-			var matrix = new Matrix(Enumerable.Range(1, 16).Cast<float>());
+			var matrix = new Matrix(Enumerable.Range(1, 16).Cast<double>());
 
 			Assert.Equal(1, matrix[0, 0]);
 			Assert.Equal(2, matrix[0, 1]);

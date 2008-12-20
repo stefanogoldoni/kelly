@@ -6,33 +6,33 @@ namespace Kelly.Specs.Math.MatrixSpecs {
 	public class When_constructing_a_matrix_from_an_array {
 		[Fact]
 		public void An_ArgumentException_is_thrown_when_the_width_of_the_array_is_less_than_4() {
-			Assert.Throws(typeof (ArgumentException), () => { new Matrix(new float[3,4]); });
+			Assert.Throws(typeof (ArgumentException), () => { new Matrix(new double[3,4]); });
 		}
 
 		[Fact]
 		public void An_ArgumentException_is_thrown_when_the_width_of_the_array_is_greater_than_4() {
-			Assert.Throws(typeof (ArgumentException), () => { new Matrix(new float[5,4]); });
+			Assert.Throws(typeof (ArgumentException), () => { new Matrix(new double[5,4]); });
 		}
 
 		[Fact]
 		public void An_ArgumentException_is_thrown_when_the_height_of_the_array_is_less_than_4() {
-			Assert.Throws(typeof (ArgumentException), () => { new Matrix(new float[4,3]); });
+			Assert.Throws(typeof (ArgumentException), () => { new Matrix(new double[4,3]); });
 		}
 
 		[Fact]
 		public void An_ArgumentException_is_thrown_when_the_height_of_the_array_is_greater_than_4() {
-			Assert.Throws(typeof (ArgumentException), () => { new Matrix(new float[4,5]); });
+			Assert.Throws(typeof (ArgumentException), () => { new Matrix(new double[4,5]); });
 		}
 
 		[Fact]
 		public void No_exception_is_thrown_when_the_width_and_height_of_the_array_both_equal_4() {
-			Assert.DoesNotThrow(() => { new Matrix(new float[4,4]); });
+			Assert.DoesNotThrow(() => { new Matrix(new double[4,4]); });
 		}
 
 		[Fact]
 		public void Elements_are_assigned_in_row_major_order() {
 			var matrix = new Matrix(
-				new float[4,4] {
+				new double[4,4] {
 				               	{1, 2, 3, 4},
 				               	{5, 6, 7, 8},
 				               	{9, 10, 11, 12},

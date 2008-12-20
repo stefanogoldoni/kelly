@@ -5,10 +5,10 @@ namespace Kelly {
 		public Point Position { get; set; }
 		public Vector ViewDirection { get; set; }
 		public Vector UpVector { get; set; }
-		public float FieldOfView { get; set; }
-		public float AspectRatio { get; set; }
+		public double FieldOfView { get; set; }
+		public double AspectRatio { get; set; }
 
-		public SimpleCamera(Point position, Vector viewDirection, Vector upVector, float fieldOfView, float aspectRatio) {
+		public SimpleCamera(Point position, Vector viewDirection, Vector upVector, double fieldOfView, double aspectRatio) {
 			Position = position;
 			ViewDirection = viewDirection;
 			UpVector = upVector;

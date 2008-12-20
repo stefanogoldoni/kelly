@@ -4,15 +4,15 @@ using System.Diagnostics;
 namespace Kelly.Math {
 	[DebuggerDisplay("({X}, {Y})")]
 	public class Point2 {
-		public Point2(float x, float y) {
+		public Point2(double x, double y) {
 			X = x;
 			Y = y;
 		}
 
-		public float X { get; private set; }
-		public float Y { get; private set; }
+		public double X { get; private set; }
+		public double Y { get; private set; }
 
-		public static float DistanceBetween(Point2 x, Point2 y) {
+		public static double DistanceBetween(Point2 x, Point2 y) {
 			return (x - y).Length;
 		}
 
@@ -28,11 +28,11 @@ namespace Kelly.Math {
 			return new Point2(left.X - right.X, left.Y - right.Y);
 		}
 
-		public static Point2 operator *(Point2 point, float scalar) {
+		public static Point2 operator *(Point2 point, double scalar) {
 			return new Point2(point.X * scalar, point.Y * scalar);
 		}
 
-		public static Point2 operator /(Point2 point, float scalar) {
+		public static Point2 operator /(Point2 point, double scalar) {
 			return new Point2(point.X / scalar, point.Y / scalar);
 		}
 

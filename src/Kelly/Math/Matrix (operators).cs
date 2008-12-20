@@ -2,11 +2,11 @@
 
 namespace Kelly.Math {
 	public partial class Matrix {
-		public static Matrix operator *(float scalar, Matrix matrix) {
+		public static Matrix operator *(double scalar, Matrix matrix) {
 			return matrix * scalar;
 		}
 
-		public static Matrix operator *(Matrix matrix, float scalar) {
+		public static Matrix operator *(Matrix matrix, double scalar) {
 			return new Matrix(
 				matrix.Select(el => el * scalar));
 		}

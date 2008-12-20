@@ -17,12 +17,12 @@ namespace Kelly.Imaging {
 			);
 		}
 
-		private static int ConvertComponent(float component) {
+		private static int ConvertComponent(double component) {
 			return (int)(component * 255);
 		}
 
-		private static float ConvertComponent(int component) {
-			return (float)component / 255f;
+		private static double ConvertComponent(int component) {
+			return (double)component / 255f;
 		}
 	}
 }

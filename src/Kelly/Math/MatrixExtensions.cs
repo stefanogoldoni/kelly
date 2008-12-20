@@ -19,14 +19,14 @@ namespace Kelly.Math {
 			return (1f / determinant) * cofactorMatrix;
 		}
 
-		public static float CalculateDeterminant(this Matrix matrix) {
+		public static double CalculateDeterminant(this Matrix matrix) {
 			return matrix[0, 0] * matrix.Cofactor(0, 0)
 				+ matrix[0, 1] * matrix.Cofactor(0, 1)
 				+ matrix[0, 2] * matrix.Cofactor(0, 2)
 				+ matrix[0, 3] * matrix.Cofactor(0, 3);
 		}
 
-		private static float Determinant3x3(float[,] matrix) {
+		private static double Determinant3x3(double[,] matrix) {
 			var a = matrix[0, 0];
 			var b = matrix[0, 1];
 			var c = matrix[0, 2];
@@ -49,7 +49,7 @@ namespace Kelly.Math {
 		/// See:
 		///		http://en.wikipedia.org/wiki/Cofactor_(linear_algebra)
 		/// </summary>
-		private static float Cofactor(this Matrix matrix, int row, int column) {
+		private static double Cofactor(this Matrix matrix, int row, int column) {
 			var minor = matrix.Minor(row, column);
 
 			return (row + column) % 2 == 0
@@ -63,8 +63,8 @@ namespace Kelly.Math {
 		/// See: 
 		///		http://en.wikipedia.org/wiki/Minor_(linear_algebra)
 		/// </summary>
-		private static float Minor(this Matrix matrix, int row, int column) {
-			var minorMatrix = new float[3, 3];
+		private static double Minor(this Matrix matrix, int row, int column) {
+			var minorMatrix = new double[3, 3];
 
 			for (int x = 0, minorX = 0; x < 4; x++) {
 				if (x == row)

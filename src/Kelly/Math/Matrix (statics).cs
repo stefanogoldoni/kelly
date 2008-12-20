@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace Kelly.Math {
 	public partial class Matrix {
-		public static readonly Matrix Zero = new Matrix(Enumerable.Repeat(0f, 16));
+		public static readonly Matrix Zero = new Matrix(Enumerable.Repeat((double)0, 16));
 		public static readonly Matrix Identity = UniformScaling(1f);
 
-		public static Matrix UniformScaling(float value) {
+		public static Matrix UniformScaling(double value) {
 			return Scaling(value, value, value);
 		}
 
-		public static Matrix Scaling(float x, float y, float z) {
+		public static Matrix Scaling(double x, double y, double z) {
 			var matrix = new Matrix();
 			matrix[0, 0] = x;
 			matrix[1, 1] = y;
@@ -19,7 +19,7 @@ namespace Kelly.Math {
 			return matrix;
 		}
 
-		public static Matrix Translation(float x, float y, float z) {
+		public static Matrix Translation(double x, double y, double z) {
 			var matrix = new Matrix();
 			matrix[0, 3] = x;
 			matrix[1, 3] = y;
@@ -29,21 +29,21 @@ namespace Kelly.Math {
 		}
 
 		/// <summary>
-		///		Creates a matrix that represents a rotation of <paramref name="degrees"/> degrees about <paramref name="axis"/>.
+		///		Creates a matrix that represents a rotation of <paramref name="angle"/> radians about <paramref name="axis"/>.
 		/// </summary>
 		/// <remarks>
 		///		We use the same coordinate system as OpenGL (right-handed), and we use their matrix rotation specs as a spec for our rotations.
 		///		<see cref="http://opengl.org/documentation/specs/man_pages/hardcopy/GL/html/gl/rotate.html"/>
 		/// </remarks>
-		public static Matrix Rotation(Vector axis, float degrees) {
+		public static Matrix Rotation(Vector axis, double angle) {
 			axis = axis.ToUnitVector();
 
 			var x = axis.X;
 			var y = axis.Y;
 			var z = axis.Z;
 
-			var sin = (float)System.Math.Sin(degrees.ToRadians());
-			var cos = (float)System.Math.Cos(degrees.ToRadians());
+			var sin = System.Math.Sin(angle);
+			var cos = System.Math.Cos(angle);
 	
 			return new Matrix(
 				x * x * (1 - cos) + cos,		x * y * (1 - cos) - (z * sin),	x * z * (1 - cos) + y * sin,	0,
@@ -53,7 +53,7 @@ namespace Kelly.Math {
 				);
 		}
 
-		public static Matrix PerspectiveProjection(Vector position, Vector view, Vector up, float fieldOfView, float aspectRatio) {
+		public static Matrix PerspectiveProjection(Vector position, Vector view, Vector up, double fieldOfView, double aspectRatio) {
 			throw new NotImplementedException();
 		}
 

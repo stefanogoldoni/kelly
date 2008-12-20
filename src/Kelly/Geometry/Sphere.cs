@@ -2,13 +2,13 @@
 
 namespace Kelly.Geometry {
 	public class Sphere : IIntersectable {
-		public Sphere(Point position, float radius) {
+		public Sphere(Point position, double radius) {
 			Position = position;
 			Radius = radius;
 		}
 
 		public Point Position { get; private set; }
-		public float Radius { get; private set; }
+		public double Radius { get; private set; }
 
 		public Intersection Intersects(Ray ray) {
 			var between = ray.Origin - Position;
@@ -22,8 +22,8 @@ namespace Kelly.Geometry {
 			}
 
 			var distance = (b > 0) 
-				? -b + (float)System.Math.Sqrt(d) 
-				: -b - (float)System.Math.Sqrt(d);
+				? -b + System.Math.Sqrt(d) 
+				: -b - System.Math.Sqrt(d);
 
 			return new Intersection(ray, distance);
 		}

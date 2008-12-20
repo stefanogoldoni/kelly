@@ -6,7 +6,7 @@ namespace Kelly.Specs.Math.VectorSpecs {
 		private static readonly System.Random _rng = new System.Random();
 
 		protected override Vector GetRandomInstance() {
-			return new Vector((float) _rng.NextDouble(), (float) _rng.NextDouble(), (float) _rng.NextDouble());
+			return new Vector(_rng.NextDouble(), _rng.NextDouble(), _rng.NextDouble());
 		}
 
 		protected override Vector[] GetRandomInstancesThatAreEqual(int count) {

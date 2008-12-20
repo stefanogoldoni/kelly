@@ -6,8 +6,8 @@
 
 		private readonly System.Random _rng;
 
-		public float Next() {
-			return (float)_rng.NextDouble();
+		public double Next() {
+			return _rng.NextDouble();
 		}
 	}
 }

@@ -56,17 +56,11 @@ namespace Kelly.Sampling.Visualization {
 
 				graphics.FillRectangle(Brushes.Black, 0, 0, target.Width, target.Height);
 
-				//graphics.FillRectangles(
-				//    Brushes.White, 
-				//    generator.GenerateSamples(SampleCount)
-				//        .Select(point => new RectangleF(point.X * (target.Width - 1), point.Y * (target.Height - 1), 2, 2))
-				//        .ToArray());
-
 				foreach (var point in generator.GenerateSamples(SampleCount)) {
 				    graphics.FillEllipse(
 						Brushes.White, 
-						point.X * (target.Width - 1), 
-						point.Y * (target.Height - 1), 
+						(float) (point.X * (target.Width - 1)), 
+						(float) (point.Y * (target.Height - 1)), 
 						5, 
 						5);
 				}
@@ -87,9 +81,9 @@ namespace Kelly.Sampling.Visualization {
 			}
 		}
 
-		private float CenterBiasAmount {
+		private double CenterBiasAmount {
 			get {
-				return centerBiasSlider.Value / (float)CenterBiasGranularity;
+				return centerBiasSlider.Value / (double)CenterBiasGranularity;
 			}
 		}
 

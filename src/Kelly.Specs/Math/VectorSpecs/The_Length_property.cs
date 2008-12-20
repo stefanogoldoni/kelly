@@ -7,7 +7,7 @@ namespace Kelly.Specs.Math.VectorSpecs {
 		public void Equals_the_square_root_of_the_SquaredLength_property() {
 			var a = new Vector(43, 29, -14);
 
-			Assert.Equal((float)System.Math.Sqrt(a.SquaredLength), a.Length);
+			Assert.Equal(System.Math.Sqrt(a.SquaredLength), a.Length);
 		}
 
 		[Fact]

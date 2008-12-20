@@ -19,7 +19,7 @@ namespace Kelly.Specs.Math.MatrixSpecs {
 		}
 
 		private static Vector Rotate90Degrees(Vector vectorToRotate, Vector rotationAxis) {
-			var transformation = Matrix.Rotation(rotationAxis, 90f);
+			var transformation = Matrix.Rotation(rotationAxis, 90d.ToRadians());
 			return transformation * vectorToRotate;
 		}
 	}

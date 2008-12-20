@@ -4,9 +4,9 @@ using Kelly.Math;
 namespace Kelly.Sampling {
 	public class CenterBiasedSampleGenerator : ISampleGenerator {
 		private readonly ISampleGenerator _underlyingGenerator;
-		private readonly float _bias;
+		private readonly double _bias;
 
-		public CenterBiasedSampleGenerator(ISampleGenerator underlyingGenerator, float bias) {
+		public CenterBiasedSampleGenerator(ISampleGenerator underlyingGenerator, double bias) {
 			_underlyingGenerator = underlyingGenerator;
 			_bias = bias;
 		}
@@ -17,8 +17,8 @@ namespace Kelly.Sampling {
 
 				yield return 
 					new Point2(
-						(float)System.Math.Pow(System.Math.Abs(transformed.X), _bias) * System.Math.Sign(transformed.X),
-						(float)System.Math.Pow(System.Math.Abs(transformed.Y), _bias) * System.Math.Sign(transformed.Y)
+						System.Math.Pow(System.Math.Abs(transformed.X), _bias) * System.Math.Sign(transformed.X),
+						System.Math.Pow(System.Math.Abs(transformed.Y), _bias) * System.Math.Sign(transformed.Y)
 					) / 2 + new Vector2(.5f, .5f);
 			}
 		}

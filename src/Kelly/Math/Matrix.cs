@@ -6,12 +6,12 @@ namespace Kelly.Math {
 	/// <summary>
 	/// Represents a row-major 4x4 matrix.
 	/// </summary>
-	public partial class Matrix : IEnumerable<float> {
+	public partial class Matrix : IEnumerable<double> {
 		private Matrix() {
-			_values = new float[4, 4];
+			_values = new double[4, 4];
 		}
 
-		public Matrix(IEnumerable<float> values) : this() {
+		public Matrix(IEnumerable<double> values) : this() {
 			var index = 0;
 
 			foreach (var element in values) {
@@ -28,7 +28,7 @@ namespace Kelly.Math {
 			}
 		}
 
-		public Matrix(float[,] values) : this() {
+		public Matrix(double[,] values) : this() {
 			if (values.GetLength(0) != 4 || values.GetLength(1) != 4) {
 				throw new ArgumentException("The passed array does not have the correct dimensions. You can only initialize a matrix from a 4-by-4 array.", "values");
 			}
@@ -37,10 +37,10 @@ namespace Kelly.Math {
 		}
 
 		public Matrix(
-			float _00, float _01, float _02, float _03,
-			float _10, float _11, float _12, float _13,
-			float _20, float _21, float _22, float _23,
-			float _30, float _31, float _32, float _33) : this() {
+			double _00, double _01, double _02, double _03,
+			double _10, double _11, double _12, double _13,
+			double _20, double _21, double _22, double _23,
+			double _30, double _31, double _32, double _33) : this() {
 
 			this[0, 0] = _00;
 			this[0, 1] = _01;
@@ -63,9 +63,9 @@ namespace Kelly.Math {
 			this[3, 3] = _33;
 		}
 
-		private readonly float[,] _values;
+		private readonly double[,] _values;
 
-		public float this[int x, int y] {
+		public double this[int x, int y] {
 			get { return _values[x, y]; }
 			private set { _values[x, y] = value; }
 		}
@@ -74,7 +74,7 @@ namespace Kelly.Math {
 			return new Matrix(this);
 		}
 
-		public IEnumerator<float> GetEnumerator() {
+		public IEnumerator<double> GetEnumerator() {
 			for (var row = 0; row < 4; row++) {
 				for (var col = 0; col < 4; col++) {
 					yield return this[row, col];

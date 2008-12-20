@@ -9,7 +9,7 @@ namespace Kelly.Specs.Math.MatrixSpecs {
 			return new Matrix(
 				Enumerable
 					.Repeat(0f, 16)
-					.Select(x => (float)_rng.NextDouble() * 10f));
+					.Select(x => _rng.NextDouble() * 10));
 		}
 
 		protected override Matrix[] GetRandomInstancesThatAreEqual(int count) {

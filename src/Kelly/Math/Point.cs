@@ -3,23 +3,23 @@
 namespace Kelly.Math {
 	[DebuggerDisplay("{ToString()}")]
 	public struct Point {
-		public Point(float x, float y, float z) {
+		public Point(double x, double y, double z) {
 			_x = x;
 			_y = y;
 			_z = z;
 		}
 
-		public readonly float _x, _y, _z;
+		public readonly double _x, _y, _z;
 
-		public float X {
+		public double X {
 			get { return _x; }
 		}
 
-		public float Y {
+		public double Y {
 			get { return _y; }
 		}
 
-		public float Z {
+		public double Z {
 			get { return _z; }
 		}
 

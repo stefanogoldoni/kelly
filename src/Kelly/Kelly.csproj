@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,14 +56,15 @@
     <Compile Include="Imaging\BitmapImage.cs" />
     <Compile Include="Imaging\ColorExtensions.cs" />
     <Compile Include="Imaging\IImage.cs" />
-    <Compile Include="IntegerExtensions.cs" />
+    <Compile Include="Math\EpsilonComparer.cs" />
+    <Compile Include="Math\IntegerExtensions.cs" />
     <Compile Include="Math\Matrix %28object overrides%29.cs" />
     <Compile Include="Math\Matrix %28statics%29.cs" />
     <Compile Include="Math\Matrix %28operators%29.cs" />
-    <Compile Include="Math\SingleExtensions.cs" />
+    <Compile Include="Math\DoubleExtensions.cs" />
     <Compile Include="Math\Vector2.cs" />
     <Compile Include="OrthogonalCamera.cs" />
-    <Compile Include="RandomNumberGeneratorExtensions.cs" />
+    <Compile Include="Random\RandomNumberGeneratorExtensions.cs" />
     <Compile Include="Random\MerseneTwisterRandomNumberGenerator.cs" />
     <Compile Include="Sampling\CenterBiasedSampleGenerator.cs" />
     <Compile Include="Sampling\ISampleGenerator.cs" />

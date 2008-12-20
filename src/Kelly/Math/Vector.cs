@@ -3,35 +3,35 @@
 namespace Kelly.Math {
 	[DebuggerDisplay("{ToString()}")]
 	public struct Vector {
-		public Vector(float x, float y, float z) {
+		public Vector(double x, double y, double z) {
 			_x = x;
 			_y = y;
 			_z = z;
 		}
 
-		private readonly float _x, _y, _z;
+		private readonly double _x, _y, _z;
 
-		public float X {
+		public double X {
 			get { return _x; }
 		}
 
-		public float Y {
+		public double Y {
 			get { return _y; }
 		}
 
-		public float Z {
+		public double Z {
 			get { return _z; }
 		}
 
-		public float SquaredLength {
+		public double SquaredLength {
 			get { return DotProduct(this, this); }
 		}
 
-		public float Length {
-			get { return (float)System.Math.Sqrt(SquaredLength); }
+		public double Length {
+			get { return System.Math.Sqrt(SquaredLength); }
 		}
 
-		public Vector Scale(float s) {
+		public Vector Scale(double s) {
 			return new Vector(X * s, Y * s, Z * s);
 		}
 
@@ -43,7 +43,7 @@ namespace Kelly.Math {
 			return this / Length;
 		}
 
-		public static float DotProduct(Vector x, Vector y) {
+		public static double DotProduct(Vector x, Vector y) {
 			return x.X * y.X
 				 + x.Y * y.Y
 				 + x.Z * y.Z;
@@ -76,18 +76,18 @@ namespace Kelly.Math {
 			);			
 		}
 
-		public static Vector operator *(Vector vector, float scalar) {
+		public static Vector operator *(Vector vector, double scalar) {
 			return new Vector(
 				vector.X * scalar,
 				vector.Y * scalar,
 				vector.Z * scalar);
 		}
 
-		public static Vector operator *(float scalar, Vector vector) {
+		public static Vector operator *(double scalar, Vector vector) {
 			return vector * scalar;
 		}
 
-		public static Vector operator /(Vector vector, float scalar) {
+		public static Vector operator /(Vector vector, double scalar) {
 			return new Vector(
 				vector.X / scalar, 
 				vector.Y / scalar, 

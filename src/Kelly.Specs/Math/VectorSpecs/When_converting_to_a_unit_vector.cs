@@ -7,7 +7,7 @@ namespace Kelly.Specs.Math.VectorSpecs {
 		[Fact]
 		public void The_zero_vector_results_in_a_NaN_vector() {
 			Assert.Equal(
-				new Vector(float.NaN, float.NaN, float.NaN), 
+				new Vector(double.NaN, double.NaN, double.NaN), 
 				Vector.Zero.ToUnitVector());
 		}
 

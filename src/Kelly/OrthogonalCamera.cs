@@ -8,12 +8,12 @@ namespace Kelly {
 		public Vector Direction { get; private set; }
 		public Vector Up { get; private set; }
 		
-		public float Width { get; private set; }
-		public float Height { get; private set; }
+		public double Width { get; private set; }
+		public double Height { get; private set; }
 
 		private readonly Vector _right;
 
-		public OrthogonalCamera(Point position, Vector direction, Vector up, float width, float height) {
+		public OrthogonalCamera(Point position, Vector direction, Vector up, double width, double height) {
 			Ensure.That("direction", direction).IsNotEqualTo(Vector.Zero);
 			Ensure.That("up", up).IsNotEqualTo(Vector.Zero);
 			Ensure.That("width", width).IsGreaterThan(0);

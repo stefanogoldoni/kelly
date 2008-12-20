@@ -1,4 +1,5 @@
 ﻿using System;
+using Kelly.Math;
 
 namespace Kelly.Random {
 	public class MersenneTwisterRandomNumberGenerator : IRandomNumberGenerator {
@@ -62,7 +63,7 @@ namespace Kelly.Random {
 			return value;
 		}
 
-		public float Next() {
+		public double Next() {
 			return NextUInt() / 4294967295.0f; 
 		}
 
