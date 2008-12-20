@@ -2,15 +2,37 @@
 
 namespace Kelly.Math {
 	public class EpsilonComparer : IComparer<double>, IComparer<Vector> {
-		private static readonly double MaxErrorDivisor = System.Math.Pow(10, 15);
+		private EpsilonComparer() {
+		}
+
+		public static IComparer<double> DoubleComparer {
+			get { return new EpsilonComparer(); }
+		}
+
+		public static IComparer<Vector> VectorComparer {
+			get { return new EpsilonComparer(); }
+		}
+
+		public static readonly double MaxErrorMultiplier = 1.0 / System.Math.Pow(10, 15);
 
 		public int Compare(double x, double y) {
-			var difference = x - y;
-			var maxError = System.Math.Max(x, y) / MaxErrorDivisor;
+			if (x == y)
+				return 0;
 
-			return System.Math.Abs(difference) < maxError
-					? 0 
-					: System.Math.Sign(difference);
+			var difference = x - y;
+			var maxError = System.Math.Max(x, y) * MaxErrorMultiplier;
+
+			// Hack to deal with issues comparing to 0
+			if (x == 0 || y == 0) {
+				if (System.Math.Abs(difference) < MaxErrorMultiplier) {
+					return 0;
+				}
+			}
+			else if (System.Math.Abs(difference) < maxError) {
+				return 0;
+			}
+
+			return System.Math.Sign(difference);
 		}
 
 		public int Compare(Vector x, Vector y) {

@@ -15,15 +15,18 @@ namespace Kelly.Specs.Math.VectorSpecs {
 		public void The_result_is_the_sum_of_the_two_vectors() {
 			Assert.Equal(
 				new Vector(1f, 1f, 0),
-				Vector.UnitX + Vector.UnitY);
+				Vector.UnitX + Vector.UnitY,
+				EpsilonComparer.VectorComparer);
 
 			Assert.Equal(
 				new Vector(1, 2, 3),
-				new Vector(1, 0, 3) + new Vector(0, 2, 0));
+				new Vector(1, 0, 3) + new Vector(0, 2, 0),
+				EpsilonComparer.VectorComparer);
 
 			Assert.Equal(
 				new Vector(1, 1, 1),
-				new Vector(.5f, .3f, .2f) + new Vector(.5f, .7f, .8f));
+				new Vector(.5, .3, .2) + new Vector(.5, .7, .8),
+				EpsilonComparer.VectorComparer);
 		}
 	}
 }
