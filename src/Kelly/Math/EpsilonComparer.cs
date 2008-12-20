@@ -5,6 +5,10 @@ namespace Kelly.Math {
 		private EpsilonComparer() {
 		}
 
+		public static int Compare(double x, double y) {
+			return DoubleComparer.Compare(x, y);
+		}
+
 		public static IComparer<double> DoubleComparer {
 			get { return new EpsilonComparer(); }
 		}
@@ -15,7 +19,7 @@ namespace Kelly.Math {
 
 		public static readonly double MaxErrorMultiplier = 1.0 / System.Math.Pow(10, 15);
 
-		public int Compare(double x, double y) {
+		int IComparer<double>.Compare(double x, double y) {
 			if (x == y)
 				return 0;
 
@@ -35,7 +39,7 @@ namespace Kelly.Math {
 			return System.Math.Sign(difference);
 		}
 
-		public int Compare(Vector x, Vector y) {
+		int IComparer<Vector>.Compare(Vector x, Vector y) {
 			return Compare(x.X, y.X) * 100 + Compare(x.Y, y.Y) * 10 + Compare(x.Z, y.Z);
 		}
 	}

@@ -36,7 +36,7 @@ namespace Kelly.Math {
 		}
 
 		public bool IsUnit {
-			get { return EpsilonComparer.DoubleComparer.Compare(SquaredLength, 1) == 0; }
+			get { return EpsilonComparer.Compare(SquaredLength, 1) == 0; }
 		}
 
 		public Vector ToUnitVector() {
