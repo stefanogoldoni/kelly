@@ -59,6 +59,7 @@
     <Compile Include="Math\Matrix %28object overrides%29.cs" />
     <Compile Include="Math\Matrix %28statics%29.cs" />
     <Compile Include="Math\Matrix %28operators%29.cs" />
+    <Compile Include="Math\SingleExtensions.cs" />
     <Compile Include="Math\Vector2.cs" />
     <Compile Include="OrthogonalCamera.cs" />
     <Compile Include="RandomNumberGeneratorExtensions.cs" />

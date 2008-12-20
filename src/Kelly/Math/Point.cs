@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 
 namespace Kelly.Math {
-	[DebuggerDisplay("({X}, {Y}, {Z})")]
+	[DebuggerDisplay("{ToString()}")]
 	public struct Point {
 		public Point(float x, float y, float z) {
 			_x = x;
@@ -44,5 +44,9 @@ namespace Kelly.Math {
 		}
 
 		public static readonly Point Zero = new Point(0, 0, 0);
+
+		public override string ToString() {
+			return string.Format("({0}, {1}, {2})", X, Y, Z);
+		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 
 namespace Kelly.Math {
-	[DebuggerDisplay("({X}, {Y}, {Z})")]
+	[DebuggerDisplay("{ToString()}")]
 	public struct Vector {
 		public Vector(float x, float y, float z) {
 			_x = x;
@@ -98,5 +98,9 @@ namespace Kelly.Math {
 		public static readonly Vector UnitX = new Vector(1f, 0, 0);
 		public static readonly Vector UnitY = new Vector(0, 1f, 0);
 		public static readonly Vector UnitZ = new Vector(0, 0, 1f);
+
+		public override string ToString() {
+			return string.Format("({0}, {1}, {2})", X, Y, Z);
+		}
 	}
 }
