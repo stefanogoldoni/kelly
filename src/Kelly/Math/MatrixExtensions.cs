@@ -5,15 +5,25 @@ namespace Kelly.Math {
 		public static Matrix Invert(this Matrix matrix) {
 			var determinant = matrix.CalculateDeterminant();
 
-			throw new NotImplementedException();
-			//return 1f / determinant * matrix;
+			if (determinant == 0f) {
+				throw new Exception("Cannot invert a singular matrix.");
+			}
+
+			var cofactorMatrix = new Matrix(
+				matrix.Cofactor(0, 0), matrix.Cofactor(1, 0), matrix.Cofactor(2, 0), matrix.Cofactor(3, 0),
+				matrix.Cofactor(0, 1), matrix.Cofactor(1, 1), matrix.Cofactor(2, 1), matrix.Cofactor(3, 1),
+				matrix.Cofactor(0, 2), matrix.Cofactor(1, 2), matrix.Cofactor(2, 2), matrix.Cofactor(3, 2),
+				matrix.Cofactor(0, 3), matrix.Cofactor(1, 3), matrix.Cofactor(2, 3), matrix.Cofactor(3, 3)
+				);
+
+			return (1f / determinant) * cofactorMatrix;
 		}
 
 		public static float CalculateDeterminant(this Matrix matrix) {
-			return matrix[0, 0] * Determinant3x3(matrix.Minor(0, 0))
-				- matrix[0, 1] * Determinant3x3(matrix.Minor(0, 1))
-				+ matrix[0, 2] * Determinant3x3(matrix.Minor(0, 2))
-				- matrix[0, 3] * Determinant3x3(matrix.Minor(0, 3));
+			return matrix[0, 0] * matrix.Cofactor(0, 0)
+				+ matrix[0, 1] * matrix.Cofactor(0, 1)
+				+ matrix[0, 2] * matrix.Cofactor(0, 2)
+				+ matrix[0, 3] * matrix.Cofactor(0, 3);
 		}
 
 		private static float Determinant3x3(float[,] matrix) {
@@ -34,28 +44,44 @@ namespace Kelly.Math {
 		}
 
 		/// <summary>
-		/// Returns the 3x3 minor matrix for the passed row and column.
-		/// More info at http://en.wikipedia.org/wiki/Cofactor_(linear_algebra)
+		/// Returns the cofactor (i.e., signed minor) for the passed row and column.
+		/// 
+		/// See:
+		///		http://en.wikipedia.org/wiki/Cofactor_(linear_algebra)
 		/// </summary>
-		public static float[,] Minor(this Matrix matrix, int row, int column) {
-			var minor = new float[3, 3];
+		private static float Cofactor(this Matrix matrix, int row, int column) {
+			var minor = matrix.Minor(row, column);
+
+			return (row + column) % 2 == 0
+			       	? minor
+			       	: - minor;
+		}
+
+		/// <summary>
+		/// Returns the minor for the passed row and column.
+		/// 
+		/// See: 
+		///		http://en.wikipedia.org/wiki/Minor_(linear_algebra)
+		/// </summary>
+		private static float Minor(this Matrix matrix, int row, int column) {
+			var minorMatrix = new float[3, 3];
 
 			for (int x = 0, minorX = 0; x < 4; x++) {
 				if (x == row)
 					continue;
 
 				for (int y = 0, minorY = 0; y < 4; y++) {
-					if (y == 0)
+					if (y == column)
 						continue;
 
-					minor[minorX, minorY] = matrix[x, y];
+					minorMatrix[minorX, minorY] = matrix[x, y];
 					minorY++;
 				}
 
 				minorX++;
 			}
 
-			return minor;
+			return Determinant3x3(minorMatrix);
 		}
 
 		public static Matrix Transpose(this Matrix matrix) {
