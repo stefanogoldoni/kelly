@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Castle.Windsor;
+﻿using Castle.Windsor;
 using Kelly.Geometry;
 using Kelly.Math;
 using Kelly.Random;
@@ -17,11 +16,10 @@ namespace Kelly.Console {
 			container.AddComponent("renderer", typeof (IRenderer), typeof (TracingRenderer));
 			var renderer = container.Resolve<IRenderer>(new { samplesPerPixel = 1 });
 
-			var surface = new BitmapRenderTarget(40, 30);
-			var scene = new Sphere(Point.Zero, 1);
-			var camera = new OrthogonalCamera(new Point(0, 2, 10), -Vector.UnitZ, Vector.UnitY, 4, 4);
+			var surface = new BitmapRenderTarget(100, 100);
+			var scene = new Sphere(new Point(.5, .5, 2), .5);
 
-			renderer.RenderScene(surface, camera, scene);
+			renderer.RenderScene(surface, scene);
 
 			surface.Bitmap.Save("output.bmp");
 		}

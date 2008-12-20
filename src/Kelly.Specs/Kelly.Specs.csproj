@@ -70,7 +70,7 @@
     <Compile Include="Math\VectorSpecs\When_calculating_cross_product.cs" />
     <Compile Include="Math\VectorSpecs\When_calculating_the_dot_product_of_two_vectors.cs" />
     <Compile Include="EqualitySpecs.cs" />
-    <Compile Include="Geometry\SphereSpecs.cs" />
+    <Compile Include="Geometry\SphereSpecs\When_intersecting_with_a_ray.cs" />
     <Compile Include="Math\MatrixSpecs\MatrixHelper.cs" />
     <Compile Include="Math\VectorSpecs\The_IsUnit_property.cs" />
     <Compile Include="Math\VectorSpecs\The_Length_property.cs" />

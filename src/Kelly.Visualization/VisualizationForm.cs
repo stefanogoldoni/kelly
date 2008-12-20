@@ -1,31 +1,61 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 using Castle.Windsor;
 using Kelly.Geometry;
-using Kelly.Math;
 using Kelly.Random;
 using Kelly.Sampling;
+using Point=Kelly.Math.Point;
 
 namespace Kelly.Visualization {
 	public partial class VisualizationForm : Form {
 		public VisualizationForm() {
 			InitializeComponent();
 
-			var container = new WindsorContainer();
+			RenderButton.Click += WhenRenderButtonClicked;
+			SaveButton.Click += WhenSaveButtonClicked;
 
-			container.AddComponent("tracingAlgorithm", typeof(ITracingAlgorithm), typeof(DebugTracingAlgorithm));
-			container.AddComponent("rng", typeof(IRandomNumberGenerator), typeof(MersenneTwisterRandomNumberGenerator));
-			container.AddComponent("sampler", typeof(ISampleGenerator), typeof(RandomSampleGenerator));
+			InitializeIoC();
+		}
 
-			container.AddComponent("renderer", typeof(IRenderer), typeof(TracingRenderer));
-			var renderer = container.Resolve<IRenderer>(new { samplesPerPixel = 1 });
+		void WhenSaveButtonClicked(object sender, System.EventArgs e) {
+			if (saveDialog.ShowDialog() == DialogResult.OK) {
+				RenderedImage.Save(saveDialog.FileName);
+			}
+		}
+
+		void WhenRenderButtonClicked(object sender, System.EventArgs e) {
+			Render();
+		}
+
+		private IWindsorContainer IoC { get; set; }
+
+		private void InitializeIoC() {
+			IoC = new WindsorContainer();
+			IoC.AddComponent("tracingAlgorithm", typeof(ITracingAlgorithm), typeof(DebugTracingAlgorithm));
+			//IoC.AddComponent("rng", typeof(IRandomNumberGenerator), typeof(MersenneTwisterRandomNumberGenerator));
+			IoC.AddComponent("sampler", typeof(ISampleGenerator), typeof(StratifiedSampleGenerator));
+			IoC.AddComponent("renderer", typeof(IRenderer), typeof(TracingRenderer));
+		}
+
+		private void Render() {
+			var renderer = IoC.Resolve<IRenderer>(new { samplesPerPixel = 1 });
 
 			var surface = new BitmapRenderTarget(result.Width, result.Height);
-			var scene = new Sphere(Point.Zero, 10);
-			var camera = new OrthogonalCamera(new Point(0, 0, 10), -Vector.UnitZ, Vector.UnitY, 20, 20);
+			var scene = new Sphere(new Point(.5, .5, 2), .25);
 
-			renderer.RenderScene(surface, camera, scene);
+			renderer.RenderScene(surface, scene);
 
-			result.Image = surface.Bitmap;
+			RenderedImage = surface.Bitmap;			
+		}
+
+		private Image _renderedImage;
+
+		public Image RenderedImage {
+			get { return _renderedImage; }
+			set {
+				_renderedImage = value;
+				result.Image = _renderedImage;
+			}
 		}
 	}
 }

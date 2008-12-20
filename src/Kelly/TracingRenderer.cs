@@ -17,28 +17,23 @@ namespace Kelly {
 		private readonly ISampleGenerator _pixelSampleGenerator;
 		private readonly int _samplesPerPixel;
 
-		public void RenderScene(IRenderTarget target, ICamera camera, IIntersectable scene) {
+		public void RenderScene(IRenderTarget target, IIntersectable scene) {
 			Ensure.That("target", target).IsNotNull();
-			Ensure.That("camera", camera).IsNotNull();
 			Ensure.That("scene", scene).IsNotNull();
 
+			// transforms from image space into camera space
+			var imageMatrix = Matrix.Scaling(1d / target.Width, 1d / target.Height, 1);
+
 			foreach (var pixel in target.GetPixels())
-			foreach (var sample in GenerateImagePlaneSamplesForPixel(pixel, target)) {
-				var ray = camera.CreateRayThroughImagePlane(sample);
-				var rayColor = _algorithm.DetermineRayColor(ray, scene);
+			foreach (var pixelSpaceSample in _pixelSampleGenerator.GenerateSamples(_samplesPerPixel)) {
+
+				var imageSpaceSample = new Point(pixel.X + pixelSpaceSample.X, pixel.Y + pixelSpaceSample.Y, 1);
+				var cameraSpaceRay = new Ray(imageMatrix * imageSpaceSample, Vector.UnitZ);
+
+				// TODO: transform camera space ray into world space
+
+				var rayColor = _algorithm.DetermineRayColor(cameraSpaceRay, scene);
 				target.SetPixelColor(pixel, rayColor);
-			}
-		}
-
-		private IEnumerable<Point2> GenerateImagePlaneSamplesForPixel(Pixel pixel, IRenderTarget target) {
-			var pixelWidth = 1f / target.Width;
-			var pixelHeight = 1f / target.Height;
-
-			var pixelLeft = pixel.X * pixelWidth;
-			var pixelTop = pixel.Y * pixelHeight;
-
-			foreach(var sample in _pixelSampleGenerator.GenerateSamples(_samplesPerPixel)) {
-				yield return new Point2(pixelLeft + sample.X, pixelTop + sample.Y);
 			}
 		}
 	}

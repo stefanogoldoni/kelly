@@ -18,7 +18,7 @@ namespace Kelly.Geometry {
 			var d = b * b - c;
 
 			if (d <= 0) {
-				return Intersection.None;
+				return null;
 			}
 
 			var distance = (b > 0) 
