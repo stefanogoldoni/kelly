@@ -52,10 +52,10 @@
     <Compile Include="Intersection.cs" />
     <Compile Include="IRenderer.cs" />
     <Compile Include="Geometry\Sphere.cs" />
-    <Compile Include="ICamera.cs" />
     <Compile Include="Imaging\BitmapImage.cs" />
     <Compile Include="Imaging\ColorExtensions.cs" />
     <Compile Include="Imaging\IImage.cs" />
+    <Compile Include="Materials\SolidMaterial.cs" />
     <Compile Include="Math\EpsilonComparer.cs" />
     <Compile Include="Math\IntegerExtensions.cs" />
     <Compile Include="Math\Matrix %28object overrides%29.cs" />
@@ -63,9 +63,9 @@
     <Compile Include="Math\Matrix %28operators%29.cs" />
     <Compile Include="Math\DoubleExtensions.cs" />
     <Compile Include="Math\Vector2.cs" />
-    <Compile Include="OrthogonalCamera.cs" />
     <Compile Include="Random\RandomNumberGeneratorExtensions.cs" />
     <Compile Include="Random\MerseneTwisterRandomNumberGenerator.cs" />
+    <Compile Include="RenderingContext.cs" />
     <Compile Include="Sampling\CenterBiasedSampleGenerator.cs" />
     <Compile Include="Sampling\ISampleGenerator.cs" />
     <Compile Include="ITracingAlgorithm.cs" />
@@ -87,7 +87,6 @@
     <Compile Include="Sampling\RandomSampleGenerator.cs" />
     <Compile Include="Sampling\StratifiedRandomSampleGenerator.cs" />
     <Compile Include="Sampling\StratifiedSampleGenerator.cs" />
-    <Compile Include="SimpleCamera.cs" />
     <Compile Include="TracingRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

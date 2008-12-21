@@ -28,6 +28,8 @@
 			this.SaveButton = new System.Windows.Forms.Button();
 			this.saveDialog = new System.Windows.Forms.SaveFileDialog();
 			this.RenderButton = new System.Windows.Forms.Button();
+			this.samplesPerPixel = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.result)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
@@ -47,6 +49,8 @@
 			// 
 			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox1.Controls.Add(this.label1);
+			this.groupBox1.Controls.Add(this.samplesPerPixel);
 			this.groupBox1.Controls.Add(this.RenderButton);
 			this.groupBox1.Controls.Add(this.SaveButton);
 			this.groupBox1.Location = new System.Drawing.Point(660, 13);
@@ -60,9 +64,9 @@
 			// 
 			this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.SaveButton.Location = new System.Drawing.Point(6, 48);
+			this.SaveButton.Location = new System.Drawing.Point(148, 124);
 			this.SaveButton.Name = "SaveButton";
-			this.SaveButton.Size = new System.Drawing.Size(266, 23);
+			this.SaveButton.Size = new System.Drawing.Size(125, 23);
 			this.SaveButton.TabIndex = 0;
 			this.SaveButton.Text = "Save Image to File";
 			this.SaveButton.UseVisualStyleBackColor = true;
@@ -77,12 +81,29 @@
 			// 
 			this.RenderButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.RenderButton.Location = new System.Drawing.Point(7, 19);
+			this.RenderButton.Location = new System.Drawing.Point(9, 124);
 			this.RenderButton.Name = "RenderButton";
-			this.RenderButton.Size = new System.Drawing.Size(266, 23);
+			this.RenderButton.Size = new System.Drawing.Size(133, 23);
 			this.RenderButton.TabIndex = 1;
 			this.RenderButton.Text = "Render ";
 			this.RenderButton.UseVisualStyleBackColor = true;
+			// 
+			// samplesPerPixel
+			// 
+			this.samplesPerPixel.Location = new System.Drawing.Point(104, 19);
+			this.samplesPerPixel.Name = "samplesPerPixel";
+			this.samplesPerPixel.Size = new System.Drawing.Size(100, 20);
+			this.samplesPerPixel.TabIndex = 2;
+			this.samplesPerPixel.Text = "1";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(6, 22);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(92, 13);
+			this.label1.TabIndex = 3;
+			this.label1.Text = "Samples per pixel:";
 			// 
 			// VisualizationForm
 			// 
@@ -95,6 +116,7 @@
 			this.Text = "Rendering Visualization";
 			((System.ComponentModel.ISupportInitialize)(this.result)).EndInit();
 			this.groupBox1.ResumeLayout(false);
+			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -106,6 +128,8 @@
 		private System.Windows.Forms.Button SaveButton;
 		private System.Windows.Forms.SaveFileDialog saveDialog;
 		private System.Windows.Forms.Button RenderButton;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.TextBox samplesPerPixel;
 	}
 }
 

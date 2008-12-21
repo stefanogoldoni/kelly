@@ -6,21 +6,19 @@ using Kelly.Math;
 namespace Kelly {
 	public class NaiveScene : IIntersectable {
 		public NaiveScene() {
-			_geometry = new List<RenderableGeometry>();
+			_geometry = new List<IIntersectable>();
 		}
 
-		private readonly IList<RenderableGeometry> _geometry;
+		private readonly IList<IIntersectable> _geometry;
 
 		public Intersection Intersects(Ray ray) {
 			return _geometry
-				.Select(g => g.Geometry.Intersects(ray))
-				.Aggregate((left, right) => 
-					left.Distance < right.Distance 
-					? left 
-					: right);
+				.Select(g => g.Intersects(ray))
+				.OrderBy(isec => isec == null? double.PositiveInfinity : isec.Distance)
+				.FirstOrDefault();
 		}
 
-		public void AddGeometry(RenderableGeometry geometry) {
+		public void AddGeometry(IIntersectable geometry) {
 			Ensure.That("geometry", geometry).IsNotNull();
 
 			_geometry.Add(geometry);

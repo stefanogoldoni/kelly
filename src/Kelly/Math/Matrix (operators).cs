@@ -45,6 +45,10 @@ namespace Kelly.Math {
 			);
 		}
 
+		public static Ray operator  *(Matrix matrix, Ray ray) {
+			return new Ray(matrix * ray.Origin, matrix * ray.Direction);
+		}
+
 		public static bool operator ==(Matrix left, Matrix right) {
 			return left.Equals(right);
 		}

@@ -92,5 +92,17 @@ namespace Kelly.Math {
 				matrix[0, 3], matrix[1, 3], matrix[2, 3], matrix[3, 3]
 			);
 		}
+
+		public static Matrix Translate(this Matrix matrix, double x, double y, double z) {
+			return matrix * Matrix.Translation(x, y, z);
+		}
+
+		public static Matrix Scale(this Matrix matrix, double x, double y, double z) {
+			return matrix * Matrix.Scaling(x, y, z);
+		}
+
+		public static Matrix Rotate(this Matrix matrix, Vector axis, double angle) {
+			return matrix * Matrix.Rotation(axis, angle);
+		}
 	}
 }
