@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kelly.Sampling.Visualizatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kelly.Visualization", "Kelly.Visualization\Kelly.Visualization.csproj", "{6C79B0FB-BF76-4098-95A5-F575A63072B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kelly.PlyConverter", "Kelly.PlyConverter\Kelly.PlyConverter.csproj", "{C59F1D7E-0AD0-4199-A6EA-14B74877ACF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kelly.PlyConverter.Specs", "Kelly.PlyConverter.Specs\Kelly.PlyConverter.Specs.csproj", "{281F7AFD-82AC-4B65-BEDB-D2329DCFC4CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,14 @@ Global
 		{6C79B0FB-BF76-4098-95A5-F575A63072B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C79B0FB-BF76-4098-95A5-F575A63072B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C79B0FB-BF76-4098-95A5-F575A63072B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C59F1D7E-0AD0-4199-A6EA-14B74877ACF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C59F1D7E-0AD0-4199-A6EA-14B74877ACF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C59F1D7E-0AD0-4199-A6EA-14B74877ACF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C59F1D7E-0AD0-4199-A6EA-14B74877ACF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281F7AFD-82AC-4B65-BEDB-D2329DCFC4CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281F7AFD-82AC-4B65-BEDB-D2329DCFC4CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281F7AFD-82AC-4B65-BEDB-D2329DCFC4CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281F7AFD-82AC-4B65-BEDB-D2329DCFC4CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-namespace Kelly.Geometry.Ply {
+namespace Kelly.PlyConverter {
 	public enum PlyFormat {
 		Ascii,
 	}

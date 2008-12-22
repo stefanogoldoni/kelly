@@ -1,4 +1,7 @@
+using System;
+
 namespace Kelly.Geometry {
+	[Serializable]
 	public struct MeshTriangle {
 		public readonly int AIndex;
 		public readonly int BIndex;

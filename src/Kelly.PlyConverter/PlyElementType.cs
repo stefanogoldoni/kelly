@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Kelly.Geometry.Ply {
+namespace Kelly.PlyConverter {
 	public class PlyElementType {
 		public PlyElementType() {
 			Properties = new Dictionary<string, PlyProperty>();
@@ -11,6 +11,7 @@ namespace Kelly.Geometry.Ply {
 		public IDictionary<string, PlyProperty> Properties { get; set; }
 
 		public void AddProperty(PlyProperty property) {
+			property.Index = Properties.Count;
 			Properties.Add(property.Name, property);
 		}
 	}

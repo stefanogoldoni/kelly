@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FrigginAwesome.Extensions;
 using Kelly.Math;
 
 namespace Kelly.Geometry {
+	[Serializable]
 	public class Mesh : IIntersectable {
 		public Point[] Points { get; private set; }
 		public MeshTriangle[] MeshTriangles { get; private set; }

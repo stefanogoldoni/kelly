@@ -1,7 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace Kelly.Math {
-	[DebuggerDisplay("{ToString()}")]
+	[Serializable, DebuggerDisplay("{ToString()}")]
 	public struct Point {
 		public Point(double x, double y, double z) {
 			_x = x;

@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Kelly.Geometry.Ply {
+namespace Kelly.PlyConverter {
 	public class PlyParser  {
 		public PlyFile Parse(TextReader reader) {
 			_reader = reader;
@@ -16,7 +17,45 @@ namespace Kelly.Geometry.Ply {
 		}
 
 		private void ReadBody() {
-			
+			foreach(var elementType in _result.ElementTypes.Values) {
+				var elements = new PlyElement[elementType.Count];
+
+				for(var i = 0; i < elements.Length; i++) {
+					elements[0] = ReadElement(elementType);
+				}
+
+				_result.Elements[elementType] = elements;
+			}
+		}
+
+		private PlyElement ReadElement(PlyElementType elementType) {
+			var propertyValues = new object[elementType.Properties.Count];
+			var tokens = CurrentLine.Split(' ');
+
+			foreach(var property in elementType.Properties.Values) {
+				object value;
+
+				switch(property.TypeName) {
+					case "float":
+						value = float.Parse(tokens[property.Index]);
+						break;
+
+					case "int":
+						value = int.Parse(tokens[property.Index]);
+						break;
+
+					case "uchar":
+						value = byte.Parse(tokens[property.Index]);
+						break;
+
+					default:
+						throw new Exception(string.Format("Invalid property type: \"{0}\".", property.TypeName));
+				}
+
+				propertyValues[property.Index] = value;
+			}
+
+			return new PlyElement(elementType, propertyValues);
 		}
 
 		private PlyFile _result;
@@ -37,19 +76,19 @@ namespace Kelly.Geometry.Ply {
 				throw new Exception("Invalid PLY file. PLY files must start with the word \"ply\" on a single line.");
 			}
 
-			_result.Header = new PlyHeader();
-
 			NextHeaderLine();
-			_result.Header.Format = ReadFormat();
+			_result.Format = ReadFormat();
 
 			while(CurrentLine != "end_header") {
 				if (CurrentLine.StartsWith("element")) {
-					_result.Header.ElementTypes.Add(ReadElementType());
+					_result.AddElementType(ReadElementType());
 				}
 				else {
 					throw new Exception(string.Format("Invalid line encountered in PLY header: \"{0}\".", CurrentLine));
 				}
 			}
+
+			NextLine();
 		}
 
 		private PlyElementType ReadElementType() {
@@ -93,9 +132,9 @@ namespace Kelly.Geometry.Ply {
 			}
 
 			var property = new PlyProperty {
-				Name = tokens.Last(),
-				IsList = tokens[1] == "list",
-			};
+			                               	Name = tokens.Last(),
+			                               	IsList = tokens[1] == "list",
+			                               };
 
 			if (property.IsList) {
 				property.ListCountTypeName = tokens[2];
