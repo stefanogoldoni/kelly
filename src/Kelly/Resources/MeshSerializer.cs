@@ -8,7 +8,8 @@ namespace Kelly.Resources {
 	public class MeshSerializer {
 		private static IFormatter CreateFormatter() {
 			return new BinaryFormatter {
-				TypeFormat = FormatterTypeStyle.TypesWhenNeeded
+				TypeFormat = FormatterTypeStyle.TypesWhenNeeded,
+				AssemblyFormat =FormatterAssemblyStyle.Simple,
 			};			
 		}
 

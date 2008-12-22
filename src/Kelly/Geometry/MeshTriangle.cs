@@ -12,5 +12,9 @@ namespace Kelly.Geometry {
 			BIndex = bIndex;
 			CIndex = cIndex;
 		}
+
+		public override string ToString() {
+			return string.Format("({0}, {1}, {2})", AIndex, BIndex, CIndex);
+		}
 	}
 }
