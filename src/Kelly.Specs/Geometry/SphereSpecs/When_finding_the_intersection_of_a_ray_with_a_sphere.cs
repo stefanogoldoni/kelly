@@ -3,7 +3,7 @@ using Xunit;
 using Kelly.Math;
 
 namespace Kelly.Specs.Geometry.SphereSpecs {
-	public class When_intersecting_with_a_ray {
+	public class When_finding_the_intersection_of_a_ray_with_a_sphere {
 		[Fact]
 		public static void If_the_ray_points_at_the_sphere_the_result_is_not_null() {
 			var sphere = new Sphere(new Point(0, 0, 5), 1);
