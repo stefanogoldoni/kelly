@@ -29,5 +29,9 @@ namespace Kelly {
 				       	: Material.GetColorAt(Point);
 			}
 		}
+
+		public Intersection WithMaterial(IMaterial material) {
+			return new Intersection(Ray, Distance, material);
+		}
 	}
 }

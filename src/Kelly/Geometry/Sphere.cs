@@ -10,7 +10,7 @@ namespace Kelly.Geometry {
 		public Point Position { get; private set; }
 		public double Radius { get; private set; }
 
-		public Intersection Intersects(Ray ray) {
+		public Intersection FindClosestIntersectionWith(Ray ray) {
 			var between = ray.Origin - Position;
 
 			var b = Vector.DotProduct(between, ray.Direction);

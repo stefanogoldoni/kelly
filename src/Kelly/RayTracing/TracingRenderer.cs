@@ -2,7 +2,7 @@
 using Kelly.Math;
 using Kelly.Sampling;
 
-namespace Kelly {
+namespace Kelly.RayTracing {
 	public class TracingRenderer : IRenderer {
 		public TracingRenderer(ITracingAlgorithm algorithm, ISampleGenerator pixelSampleGenerator) {
 			Ensure.That("algorithm", algorithm).IsNotNull();
@@ -17,8 +17,8 @@ namespace Kelly {
 		public void RenderScene(RenderingContext context) {
 			Ensure.That("context", context).IsNotNull();
 
-			// transforms from image space into camera space
-			var imageMatrix = Matrix.Scaling(1d / context.Target.Width, 1d / context.Target.Height, 1);
+			//// transforms from image space into camera space
+			//var imageMatrix = Matrix.Scaling(1d / context.Target.Width, 1d / context.Target.Height, 1);
 
 			foreach (var pixel in context.Target.GetPixels()) {
 				var colorAccumulator = Color.Black;
@@ -27,7 +27,7 @@ namespace Kelly {
 
 					var imageSpaceSample = new Point(pixel.X + pixelSpaceSample.X, pixel.Y + pixelSpaceSample.Y, 1);
 
-					var projectionSpaceRay = new Ray(imageMatrix * imageSpaceSample, Vector.UnitZ);
+					var projectionSpaceRay = new Ray(context.ImageMatrix * imageSpaceSample, Vector.UnitZ);
 					var cameraSpaceRay = context.ProjectionMatrix * projectionSpaceRay;
 
 					// TODO: transform camera space ray into world space

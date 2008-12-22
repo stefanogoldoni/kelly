@@ -2,7 +2,7 @@
 
 namespace Kelly {
 	public interface ILight {
-		Color EmittedColor { get; }
 		Point Position { get; }
+		Color EmittedColor { get; }
 	}
 }

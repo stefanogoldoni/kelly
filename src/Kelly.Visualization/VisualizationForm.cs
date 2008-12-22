@@ -5,6 +5,7 @@ using Castle.Windsor;
 using Kelly.Geometry;
 using Kelly.Materials;
 using Kelly.Math;
+using Kelly.RayTracing;
 using Kelly.Sampling;
 using Point=Kelly.Math.Point;
 
@@ -21,6 +22,13 @@ namespace Kelly.Visualization {
 			SaveButton.Click += WhenSaveButtonClicked;
 
 			InitializeIoC();
+
+			//var image = new Bitmap(result.Width, result.Height);
+			//using(var g = Graphics.FromImage(image)) {
+			//    g.DrawRectangle(Pens.Red, 0, 0, 20, 20);
+			//}
+
+			//result.Image = image;
 		}
 
 		private Image _renderedImage;
@@ -52,16 +60,39 @@ namespace Kelly.Visualization {
 			var surface = new BitmapRenderTarget(result.Width, result.Height);
 
 			var world = new NaiveScene();
-			var s1 = new Sphere(new Point(.5, .5, 2), .25);
-			var s2 = new Sphere(new Point(1, 1, 2), .5);
+			world.AddGeometry(
+				new Renderable(
+					new Sphere(
+						new Point(0.5, 0.5, 10000),
+						1000),
+					new SolidMaterial(Color.White)));
 
-			world.AddGeometry(new RenderableGeometry(s1, new SolidMaterial(Color.Red)));
-			world.AddGeometry(new RenderableGeometry(s2, new SolidMaterial(Color.Green)));
+			world.AddGeometry(
+				new Renderable(
+					new Sphere(
+						new Point(0.5, 0.4, 100), 
+						0.3),
+					new SolidMaterial(Color.Black)));
+
+			world.AddGeometry(
+				new Renderable(
+					new Sphere(
+						new Point(0.25, 0.75, 200),
+						.2),
+					new SolidMaterial(Color.Black)));
+
+			world.AddGeometry(
+				new Renderable(
+					new Sphere(
+						new Point(0.75, 0.75, 200),
+						.2),
+					new SolidMaterial(Color.Black)));
 
 			renderer.RenderScene(new RenderingContext() {
 				Target = surface,
 				World = world,
-                ProjectionMatrix = Matrix.Scaling((double)surface.Width / surface.Height, 1, 1),
+				ImageMatrix = Matrix.Scaling(1d / surface.Width, 1d / surface.Height, 1),
+				ProjectionMatrix = Matrix.Scaling((double)surface.Width / surface.Height, 1, 1),
 				SamplesPerPixel = _samplesPerPixel
 			});
 

@@ -2,6 +2,6 @@
 
 namespace Kelly {
 	public interface IIntersectable {
-		Intersection Intersects(Ray ray);
+		Intersection FindClosestIntersectionWith(Ray ray);
 	}
 }
