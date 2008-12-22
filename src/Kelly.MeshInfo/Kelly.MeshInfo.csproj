@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C59F1D7E-0AD0-4199-A6EA-14B74877ACF3}</ProjectGuid>
+    <ProjectGuid>{51DE18FE-2275-4D67-A774-738C9A6D3DAA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kelly.PlyConverter</RootNamespace>
-    <AssemblyName>ply2mesh</AssemblyName>
+    <RootNamespace>Kelly.MeshInfo</RootNamespace>
+    <AssemblyName>meshinfo</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,12 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PlyElement.cs" />
-    <Compile Include="PlyElementType.cs" />
-    <Compile Include="PlyFile.cs" />
-    <Compile Include="PlyFormat.cs" />
-    <Compile Include="PlyParser.cs" />
-    <Compile Include="PlyProperty.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

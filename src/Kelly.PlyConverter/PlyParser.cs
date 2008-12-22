@@ -21,7 +21,10 @@ namespace Kelly.PlyConverter {
 				var elements = new PlyElement[elementType.Count];
 
 				for(var i = 0; i < elements.Length; i++) {
-					elements[0] = ReadElement(elementType);
+					if (AtEnd) 
+						throw new Exception("The end of the PLY file was reached before the expected number of elements could be parsed.");
+
+					elements[i] = ReadElement(elementType);
 				}
 
 				_result.Elements[elementType] = elements;
@@ -30,32 +33,43 @@ namespace Kelly.PlyConverter {
 
 		private PlyElement ReadElement(PlyElementType elementType) {
 			var propertyValues = new object[elementType.Properties.Count];
-			var tokens = CurrentLine.Split(' ');
 
-			foreach(var property in elementType.Properties.Values) {
-				object value;
+			var tokens = new Queue<string>(CurrentLine.Split(' '));
 
-				switch(property.TypeName) {
-					case "float":
-						value = float.Parse(tokens[property.Index]);
-						break;
+			foreach(var property in elementType.Properties.Values.OrderBy(p => p.Index)) {
+				if (property.IsList) {
+					var listElementCount = int.Parse(tokens.Dequeue());
+					var list = new object[listElementCount];
 
-					case "int":
-						value = int.Parse(tokens[property.Index]);
-						break;
+					for(var i = 0; i < list.Length; i++) {
+						list[i] = ParseValue(property.TypeName, tokens.Dequeue());
+					}
 
-					case "uchar":
-						value = byte.Parse(tokens[property.Index]);
-						break;
-
-					default:
-						throw new Exception(string.Format("Invalid property type: \"{0}\".", property.TypeName));
+					propertyValues[property.Index] = list;
 				}
-
-				propertyValues[property.Index] = value;
+				else {
+					propertyValues[property.Index] = ParseValue(property.TypeName, tokens.Dequeue());
+				}
 			}
 
+			NextLine();
 			return new PlyElement(elementType, propertyValues);
+		}
+
+		private static object ParseValue(string typename, string value) {
+			switch (typename) {
+				case "float":
+					return float.Parse(value);
+
+				case "int":
+					return int.Parse(value);
+
+				case "uchar":
+					return byte.Parse(value);
+
+				default:
+					throw new Exception(string.Format("Invalid property type: \"{0}\".", typename));
+			}
 		}
 
 		private PlyFile _result;

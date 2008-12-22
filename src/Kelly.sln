@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kelly.PlyConverter", "Kelly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kelly.PlyConverter.Specs", "Kelly.PlyConverter.Specs\Kelly.PlyConverter.Specs.csproj", "{281F7AFD-82AC-4B65-BEDB-D2329DCFC4CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kelly.MeshInfo", "Kelly.MeshInfo\Kelly.MeshInfo.csproj", "{51DE18FE-2275-4D67-A774-738C9A6D3DAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{281F7AFD-82AC-4B65-BEDB-D2329DCFC4CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{281F7AFD-82AC-4B65-BEDB-D2329DCFC4CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{281F7AFD-82AC-4B65-BEDB-D2329DCFC4CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51DE18FE-2275-4D67-A774-738C9A6D3DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51DE18FE-2275-4D67-A774-738C9A6D3DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51DE18FE-2275-4D67-A774-738C9A6D3DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51DE18FE-2275-4D67-A774-738C9A6D3DAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
