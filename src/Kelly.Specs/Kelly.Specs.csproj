@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="BitmapRenderTargetSpecs\When_setting_a_pixel_color.cs" />
     <Compile Include="ColorSpecs\When_converting_a_color_to_a_System_Drawing_Color.cs" />
+    <Compile Include="Geometry\PlyParserSpecs\When_parsing_a_ply_file_from_a_TextReader.cs" />
     <Compile Include="Math\EpsilonComparerSpecs\When_comparing_two_doubles.cs" />
     <Compile Include="Math\EpsilonComparerSpecs\When_comparing_two_vectors.cs" />
     <Compile Include="Math\MatrixSpecs\When_comparing_two_matrices.cs" />

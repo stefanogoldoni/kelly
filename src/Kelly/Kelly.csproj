@@ -47,6 +47,15 @@
   <ItemGroup>
     <Compile Include="BitmapRenderTarget.cs" />
     <Compile Include="Color.cs" />
+    <Compile Include="Geometry\IMeshLoader.cs" />
+    <Compile Include="Geometry\Mesh.cs" />
+    <Compile Include="Geometry\MeshTriangle.cs" />
+    <Compile Include="Geometry\Ply\PlyProperty.cs" />
+    <Compile Include="Geometry\Ply\PlyElementType.cs" />
+    <Compile Include="Geometry\Ply\PlyFile.cs" />
+    <Compile Include="Geometry\Ply\PlyFormat.cs" />
+    <Compile Include="Geometry\Ply\PlyHeader.cs" />
+    <Compile Include="Geometry\Ply\PlyParser.cs" />
     <Compile Include="RayTracing\DebugTracingAlgorithm.cs" />
     <Compile Include="Geometry\Triangle.cs" />
     <Compile Include="IIntersectable.cs" />
