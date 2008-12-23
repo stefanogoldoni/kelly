@@ -22,8 +22,12 @@ namespace Kelly {
 			return new Color(left.R + right.R, left.G + right.G, left.B + right.B);
 		}
 
-		public static Color operator / (Color color, double scalar) {
+		public static Color operator /(Color color, double scalar) {
 			return new Color(color.R / scalar, color.G / scalar, color.B / scalar);
+		}
+
+		public static Color operator *(Color color, double scalar) {
+			return new Color(color.R * scalar, color.G * scalar, color.B * scalar);
 		}
 
 		public override string ToString() {

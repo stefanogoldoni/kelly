@@ -1,7 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Castle.Windsor;
+using FrigginAwesome.Extensions;
 using Kelly.Geometry;
 using Kelly.Materials;
 using Kelly.Math;
@@ -33,6 +36,7 @@ namespace Kelly.Visualization {
 
 		private Image _renderedImage;
 		private readonly BackgroundWorker _renderWorker;
+		private int _renderMilliseconds;
 
 		private IWindsorContainer IoC { get; set; }
 
@@ -52,51 +56,47 @@ namespace Kelly.Visualization {
 			}
 
 			result.Image = _renderedImage;
+			renderTime.Text = TimeSpan.FromMilliseconds(_renderMilliseconds).ToString();
 		}
 
 		private void StartRender(object sender, DoWorkEventArgs e) {
 			var renderer = IoC.Resolve<IRenderer>();
 
-			var surface = new BitmapRenderTarget(result.Width, result.Height);
+			var target = new MemoryRenderTarget(result.Width, result.Height);
+
+			var color = new Color(1, 0.84, 0);
 
 			var world = new NaiveScene();
 			world.AddGeometry(
 				new Renderable(
-					new Sphere(
-						new Point(0.5, 0.5, 10000),
-						1000),
+					new Triangle(new Point(50, 80, 2), new Point(65, 55, 2), new Point(35, 55, 2)),
+					new SolidMaterial(color)));
+
+			world.AddGeometry(
+				new Renderable(
+					new Triangle(new Point(65, 55, 2), new Point(80, 30, 3), new Point(50, 30, 3)),
+					new SolidMaterial(color)));
+
+			world.AddGeometry(
+				new Renderable(
+					new Triangle(new Point(35, 55, 2), new Point(50, 30, 3), new Point(20, 30, 3)),
+					new SolidMaterial(color)));
+
+			world.AddGeometry(
+				new Renderable(
+					new Triangle(new Point(0, 1000, 3), new Point(1000, 0, 3), new Point(-1000, 0, 3)),
 					new SolidMaterial(Color.White)));
 
-			world.AddGeometry(
-				new Renderable(
-					new Sphere(
-						new Point(0.5, 0.4, 100), 
-						0.3),
-					new SolidMaterial(Color.Black)));
+			_renderMilliseconds = (int)new Stopwatch().Time(() =>
+				renderer.RenderScene(new RenderingContext {
+					Target = target,
+					World = world,
+					ImageMatrix = Matrix.Scaling(1d / target.Width * 100, 1d / target.Height * 100, 1),
+					ProjectionMatrix = Matrix.Scaling((double)target.Width / target.Height, 1, 1),
+					SamplesPerPixel = _samplesPerPixel
+				}));
 
-			world.AddGeometry(
-				new Renderable(
-					new Sphere(
-						new Point(0.25, 0.75, 200),
-						.2),
-					new SolidMaterial(Color.Black)));
-
-			world.AddGeometry(
-				new Renderable(
-					new Sphere(
-						new Point(0.75, 0.75, 200),
-						.2),
-					new SolidMaterial(Color.Black)));
-
-			renderer.RenderScene(new RenderingContext() {
-				Target = surface,
-				World = world,
-				ImageMatrix = Matrix.Scaling(1d / surface.Width, 1d / surface.Height, 1),
-				ProjectionMatrix = Matrix.Scaling((double)surface.Width / surface.Height, 1, 1),
-				SamplesPerPixel = _samplesPerPixel
-			});
-
-			_renderedImage = surface.Bitmap;
+			_renderedImage = target.ToBitmap();
 		}
 
 		private void WhenSaveButtonClicked(object sender, System.EventArgs e) {

@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using FrigginAwesome;
-using FrigginAwesome.Extensions;
 using Kelly.Math;
 
 namespace Kelly {
@@ -15,11 +13,17 @@ namespace Kelly {
 		private readonly ICollection<ILight> _lights;
 
 		public Intersection FindClosestIntersectionWith(Ray ray) {
-			return _geometry
-				.Select(g => g.FindClosestIntersectionWith(ray))
-				.WhereNotNull()
-				.OrderBy(isec => isec.Distance)
-				.FirstOrDefault();
+			Intersection closest = null;
+
+			foreach(var intersectable in _geometry) {
+				var intersection = intersectable.FindClosestIntersectionWith(ray);
+
+				if (closest == null || (intersection != null && intersection.Distance < closest.Distance)) {
+					closest = intersection;
+				}
+			}
+
+			return closest;
 		}
 
 		public void AddGeometry(IIntersectable geometry) {

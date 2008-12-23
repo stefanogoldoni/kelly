@@ -1,10 +1,12 @@
 ﻿using System.Drawing;
 using System;
+using System.Drawing.Imaging;
 
 namespace Kelly {
+	[Obsolete("Use MemoryRenderTarget instead. Call ToBitmap() to convert a MemoryRenderTarget to a Bitmap.")]
 	public class BitmapRenderTarget : IRenderTarget, IDisposable {
 		public BitmapRenderTarget(int width, int height) {
-			Bitmap = new Bitmap(width, height);
+			Bitmap = new Bitmap(width, height, PixelFormat.Format32bppRgb);
 		}
 
 		public Bitmap Bitmap { get; private set; }

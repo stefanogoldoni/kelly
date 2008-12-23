@@ -30,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FrigginAwesome, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -47,6 +48,8 @@
   <ItemGroup>
     <Compile Include="BitmapRenderTarget.cs" />
     <Compile Include="Color.cs" />
+    <Compile Include="MemoryRenderTarget.cs" />
+    <Compile Include="MemoryRenderTargetExtensions.cs" />
     <Compile Include="Resources\IMeshLoader.cs" />
     <Compile Include="Geometry\Mesh.cs" />
     <Compile Include="Geometry\MeshTriangle.cs" />

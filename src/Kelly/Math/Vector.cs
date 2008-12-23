@@ -50,10 +50,10 @@ namespace Kelly.Math {
 		}
 
 		public static Vector CrossProduct(Vector left, Vector right) {
-			return
-				(left.Y * right.Z - left.Z * right.Y) * UnitX +
-				(left.Z * right.X - left.X * right.Z) * UnitY +
-				(left.X * right.Y - left.Y * right.X) * UnitZ;					
+			return new Vector(
+				(left.Y * right.Z - left.Z * right.Y),
+				(left.Z * right.X - left.X * right.Z),
+				(left.X * right.Y - left.Y * right.X));
 		}
 
 		public static Vector operator -(Vector vector) {
