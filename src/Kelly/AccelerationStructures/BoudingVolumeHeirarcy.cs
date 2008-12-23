@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kelly.Geometry;
 using Kelly.Math;
 
-namespace Kelly {
+namespace Kelly.AccelerationStructures {
 	public class BoudingVolumeHeirarcy : IIntersectable {
 		public AxisAlignedBoundingBox Box { get; private set; }
 
@@ -14,7 +10,7 @@ namespace Kelly {
 
 		public Intersection FindClosestIntersectionWith(Ray ray) {
 			
-			//var distanceToLeft = _left.Box.IntersectsRaySegment()
+			//var distanceToLeft = _left.Box.IntersectsRay()
 			throw new NotImplementedException();
 		}
 	}

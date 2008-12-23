@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccelerationStructures\AxisAlignedBoundingBoxSpecs\When_finding_the_intersection_of_an_AABB_with_a_ray.cs" />
     <Compile Include="BitmapRenderTargetSpecs\When_setting_a_pixel_color.cs" />
     <Compile Include="ColorSpecs\When_converting_a_color_to_a_System_Drawing_Color.cs" />
     <Compile Include="Geometry\TriangleSpecs\When_finding_the_intersection_of_a_ray_with_a_triangle.cs" />

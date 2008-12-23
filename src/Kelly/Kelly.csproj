@@ -47,9 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitmapRenderTarget.cs" />
-    <Compile Include="BoudingVolumeHeirarcy.cs" />
+    <Compile Include="AccelerationStructures\BoudingVolumeHeirarcy.cs" />
     <Compile Include="Color.cs" />
-    <Compile Include="Geometry\AxisAlignedBoundingBox.cs" />
+    <Compile Include="AccelerationStructures\AxisAlignedBoundingBox.cs" />
     <Compile Include="MemoryRenderTarget.cs" />
     <Compile Include="MemoryRenderTargetExtensions.cs" />
     <Compile Include="Resources\IMeshLoader.cs" />
