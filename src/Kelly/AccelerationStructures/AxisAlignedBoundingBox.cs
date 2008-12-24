@@ -2,14 +2,20 @@
 
 namespace Kelly.AccelerationStructures {
 	public class AxisAlignedBoundingBox {
-		public Point Min { get; set; }
-		public Point Max { get; set; }
-
-		public AxisAlignedBoundingBox(Point min, Point max) {
-			Min = min;
-			Max = max;
+		public static AxisAlignedBoundingBox Combine(AxisAlignedBoundingBox x, AxisAlignedBoundingBox y) {
+			return new AxisAlignedBoundingBox(
+				Point.ElementsMin(x.Min, y.Min), 
+				Point.ElementsMax(x.Max, y.Max)
+			);
 		}
 
+		public Point Min { get; private set; }
+		public Point Max { get; private set; }
+
+		public AxisAlignedBoundingBox(Point min, Point max) {
+			Min = Point.ElementsMax(min, max);
+			Max = Point.ElementsMin(min, max);
+		}
 
 		public bool IntersectsRay(Ray ray, double min, double max) {
 			double tmin, tmax, tYMin, tYMax, tZMin, tZMax;

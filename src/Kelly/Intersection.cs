@@ -33,5 +33,17 @@ namespace Kelly {
 		public Intersection WithMaterial(IMaterial material) {
 			return new Intersection(Ray, Distance, material);
 		}
+
+		public static Intersection Closest(Intersection left, Intersection right) {
+			if (left != null) {
+				if (right != null) {
+					return left.Distance < right.Distance ? left : right;					
+				}
+
+				return left;
+			}
+
+			return right;
+		}
 	}
 }
