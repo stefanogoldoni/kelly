@@ -10,9 +10,8 @@ namespace Kelly.AccelerationStructures {
 			Max = max;
 		}
 
-		public bool IntersectsRay(Ray ray, out double distance) {
-			distance = double.PositiveInfinity;
 
+		public bool IntersectsRay(Ray ray, double min, double max) {
 			double tmin, tmax, tYMin, tYMax, tZMin, tZMax;
 
 			if (ray.Direction.X > 0) {
@@ -72,17 +71,7 @@ namespace Kelly.AccelerationStructures {
 			if (tZMax < tmax)
 				tmax = tZMax;
 
-			if (tmin > 0) {
-				distance = tmin;				
-			}
-			else if (tmax > 0) {
-				distance = tmax;
-			}
-			else {
-				return false;
-			}
-
-			return true;
+			return (tmin < max) && (tmax > min);
 		}
 	}
 }

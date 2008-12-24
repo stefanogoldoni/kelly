@@ -7,9 +7,31 @@ namespace Kelly.Specs.AccelerationStructures.AxisAlignedBoundingBoxSpecs {
 		[Fact]
 		public void If_the_ray_points_at_the_AABB_the_result_is_true_and_the_distance_is_set_correctly() {
 			var box = new AxisAlignedBoundingBox(new Point(0, 0, 0), new Point(2, 2, 2));
+			var ray = new Ray(new Point(-1, 1, 1), new Vector(1, 0.1, 0.2).ToUnitVector()	);
+
+			double distance;
+			Assert.True(box.IntersectsRay(ray, out distance));
+			Assert.Equal(1.02469507659596d, distance, EpsilonComparer.DoubleComparer);
+		}
+
+		[Fact]
+		public void For_ray_directions_with_zeros_the_result_is_still_true_for_valid_intersections() {
+			var box = new AxisAlignedBoundingBox(new Point(0, 0, 0), new Point(2, 2, 2));
 			var ray = new Ray(new Point(-1, 1, 1), Vector.UnitX);
 
 			double distance;
+			Assert.True(box.IntersectsRay(ray, out distance));
+			Assert.Equal(1d, distance);
+
+			box = new AxisAlignedBoundingBox(new Point(0, 0, 0), new Point(2, 2, 2));
+			ray = new Ray(new Point(1, -1, 1), Vector.UnitY);
+
+			Assert.True(box.IntersectsRay(ray, out distance));
+			Assert.Equal(1d, distance);
+
+			box = new AxisAlignedBoundingBox(new Point(0, 0, 0), new Point(2, 2, 2));
+			ray = new Ray(new Point(1, 1, -1), Vector.UnitZ);
+
 			Assert.True(box.IntersectsRay(ray, out distance));
 			Assert.Equal(1d, distance);
 		}
