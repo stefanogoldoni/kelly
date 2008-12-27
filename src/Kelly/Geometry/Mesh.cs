@@ -32,5 +32,9 @@ namespace Kelly.Geometry {
 				.OrderBy(intersection => intersection.Distance)
 				.FirstOrDefault();
 		}
+
+		public AxisAlignedBoundingBox GetBoundingBox() {
+			return AxisAlignedBoundingBox.FromPoints(Vertices);
+		}
 	}
 }

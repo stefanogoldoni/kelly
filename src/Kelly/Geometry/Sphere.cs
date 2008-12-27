@@ -27,5 +27,10 @@ namespace Kelly.Geometry {
 
 			return new Intersection(ray, distance);
 		}
+
+		public AxisAlignedBoundingBox GetBoundingBox() {
+			var vec = new Vector(Radius, Radius, Radius);
+			return new AxisAlignedBoundingBox(Position - vec, Position + vec);
+		}
 	}
 }

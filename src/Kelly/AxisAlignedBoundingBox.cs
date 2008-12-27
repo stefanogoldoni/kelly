@@ -1,12 +1,29 @@
-﻿using Kelly.Math;
+﻿using System.Collections.Generic;
+using Kelly.Math;
+using System.Linq;
 
-namespace Kelly.AccelerationStructures {
+namespace Kelly {
 	public class AxisAlignedBoundingBox {
+		public static AxisAlignedBoundingBox FromIntersectables(IEnumerable<IIntersectable> intersectables) {
+			return intersectables
+				.Select(i => i.GetBoundingBox())
+				.Aggregate(Combine);
+		}
+
 		public static AxisAlignedBoundingBox Combine(AxisAlignedBoundingBox x, AxisAlignedBoundingBox y) {
 			return new AxisAlignedBoundingBox(
 				Point.ElementsMin(x.Min, y.Min), 
-				Point.ElementsMax(x.Max, y.Max)
-			);
+				Point.ElementsMax(x.Max, y.Max));
+		}
+
+		public static AxisAlignedBoundingBox FromPoints(params Point[] points) {
+			return FromPoints((IEnumerable<Point>) points);
+		}
+
+		public static AxisAlignedBoundingBox FromPoints(IEnumerable<Point> points) {
+			return new AxisAlignedBoundingBox(
+				points.Aggregate(Point.ElementsMin),
+				points.Aggregate(Point.ElementsMax));
 		}
 
 		public Point Min { get; private set; }

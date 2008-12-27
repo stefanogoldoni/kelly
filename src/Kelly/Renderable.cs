@@ -19,5 +19,9 @@ namespace Kelly {
 
 			return intersection.WithMaterial(Material);
 		}
+
+		public AxisAlignedBoundingBox GetBoundingBox() {
+			return Geometry.GetBoundingBox();
+		}
 	}
 }

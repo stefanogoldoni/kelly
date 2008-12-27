@@ -51,5 +51,9 @@ namespace Kelly.Geometry {
 
 			return new Intersection(ray, distance);
 		}
+
+		public AxisAlignedBoundingBox GetBoundingBox() {
+			return AxisAlignedBoundingBox.FromPoints(_a, _b, _c);
+		}
 	}
 }

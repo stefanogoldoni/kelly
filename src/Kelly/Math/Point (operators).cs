@@ -16,6 +16,14 @@
 				);
 		}
 
+		public static Point operator -(Point x, Vector y) {
+			return new Point(
+				x.X - y.X,
+				x.Y - y.Y,
+				x.Z - y.Z
+				);
+		}
+
 		public static Point ElementsMax(Point x, Point y) {
 			return new Point(
 				System.Math.Max(x.X, y.X),

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FrigginAwesome;
 using Kelly.Math;
+using System.Linq;
 
 namespace Kelly {
 	public class NaiveScene : IScene {
@@ -24,6 +25,10 @@ namespace Kelly {
 			}
 
 			return closest;
+		}
+
+		public AxisAlignedBoundingBox GetBoundingBox() {
+			return AxisAlignedBoundingBox.FromIntersectables(_geometry);
 		}
 
 		public void AddGeometry(IIntersectable geometry) {
