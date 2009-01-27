@@ -6,12 +6,15 @@ namespace Kelly.AccelerationStructures.BoundingVolumnHeirarchies {
 			_left = left;
 			_right = right;
 
-			_leftBounds = left.GetBoundingBox();
-			_rightBounds = right.GetBoundingBox();
+			if (left != null) {
+				_leftBounds = left.GetBoundingBox();				
+			}
+
+			if (right != null) {
+				_rightBounds = right.GetBoundingBox();
+			}
 		}
 		
-		public AxisAlignedBoundingBox Box { get; private set; }
-
 		private readonly IIntersectable _left;
 		private readonly IIntersectable _right;
 
@@ -21,11 +24,11 @@ namespace Kelly.AccelerationStructures.BoundingVolumnHeirarchies {
 		public Intersection FindClosestIntersectionWith(Ray ray) {
 			Intersection closest = null;
 
-			if (_leftBounds.IntersectsRay(ray, 0, double.PositiveInfinity)) {
+			if (_left != null && _leftBounds.IntersectsRay(ray, 0, double.PositiveInfinity)) {
 				closest = _left.FindClosestIntersectionWith(ray);
 			}
 			
-			if (_rightBounds.IntersectsRay(ray, 0, (closest != null) ? closest.Distance : double.PositiveInfinity)) {
+			if (_right != null && _rightBounds.IntersectsRay(ray, 0, (closest != null) ? closest.Distance : double.PositiveInfinity)) {
 				closest = Intersection.Closest(closest, _right.FindClosestIntersectionWith(ray));
 			}
 
@@ -33,7 +36,7 @@ namespace Kelly.AccelerationStructures.BoundingVolumnHeirarchies {
 		}
 
 		public AxisAlignedBoundingBox GetBoundingBox() {
-			return AxisAlignedBoundingBox.Combine(_leftBounds, _rightBounds);
+			throw new System.NotImplementedException();
 		}
 	}
 }

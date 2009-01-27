@@ -47,7 +47,8 @@ namespace Kelly.Resources {
 		}
 
 		private static IEnumerable<MeshTriangle> ReadMeshTriangles(int count, BinaryReader file) {
-			return Enumerable.Range(0, count).Select(i => new MeshTriangle(file.ReadInt32(), file.ReadInt32(), file.ReadInt32()));
+			//return Enumerable.Range(0, count).Select(i => new MeshTriangle(file.ReadInt32(), file.ReadInt32(), file.ReadInt32()));
+			throw new NotImplementedException();
 		}
 	}
 }

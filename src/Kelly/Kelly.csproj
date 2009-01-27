@@ -46,10 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccelerationStructures\BoundingVolumnHeirarchies\MeshBvhBuilder.cs" />
     <Compile Include="BitmapRenderTarget.cs" />
     <Compile Include="AccelerationStructures\BoundingVolumnHeirarchies\BvhNode.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="AxisAlignedBoundingBox.cs" />
+    <Compile Include="Math\Axis.cs" />
     <Compile Include="Math\Point %28operators%29.cs" />
     <Compile Include="MemoryRenderTarget.cs" />
     <Compile Include="MemoryRenderTargetExtensions.cs" />

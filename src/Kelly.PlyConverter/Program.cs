@@ -31,7 +31,7 @@ namespace Kelly.PlyConverter {
 
 			var triangles = from el in ply.Elements[face]
 			                let indices = (object[]) el.GetValue("vertex_indices")
-			                select new MeshTriangle((int) indices[0], (int) indices[1], (int) indices[2]);
+			                select new MeshTriangle((int) indices[0], (int) indices[1], (int) indices[2], null); // HACK
 
 			var mesh = new Mesh(vertices, triangles);
 
