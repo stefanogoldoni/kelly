@@ -34,8 +34,8 @@ namespace Kelly {
 		}
 
 		public AxisAlignedBoundingBox(Point min, Point max) {
-			Min = Point.ElementsMax(min, max);
-			Max = Point.ElementsMin(min, max);
+			Min = Point.ElementsMin(min, max);
+			Max = Point.ElementsMax(min, max);
 		}
 
 		public bool IntersectsRay(Ray ray, double min, double max) {
