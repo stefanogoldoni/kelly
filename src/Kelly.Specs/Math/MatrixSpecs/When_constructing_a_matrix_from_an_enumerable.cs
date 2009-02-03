@@ -28,7 +28,9 @@ namespace Kelly.Specs.Math.MatrixSpecs {
 
 		[Fact]
 		public void Elements_are_assigned_in_row_major_order() {
-			var matrix = new Matrix(Enumerable.Range(1, 16).Cast<double>());
+			// Cast<double>() would throw here as of 3.5 SP1
+			//	See http://blogs.msdn.com/ed_maurer/archive/2008/02/16/breaking-change-in-linq-queries-using-explicitly-typed-range-variables.aspx
+			var matrix = new Matrix(Enumerable.Range(1, 16).Select(x => (double)x));
 
 			Assert.Equal(1, matrix[0, 0]);
 			Assert.Equal(2, matrix[0, 1]);

@@ -62,7 +62,6 @@
     <Compile Include="Geometry\MeshTriangle.cs" />
     <Compile Include="Resources\MeshLoader.cs" />
     <Compile Include="Resources\MeshSerializer.cs" />
-    <Compile Include="Resources\TrimeshLoader.cs" />
     <Compile Include="RayTracing\DebugTracingAlgorithm.cs" />
     <Compile Include="Geometry\Triangle.cs" />
     <Compile Include="IIntersectable.cs" />
