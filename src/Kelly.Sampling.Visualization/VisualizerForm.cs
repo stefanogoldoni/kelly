@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using Kelly.Random;
 
@@ -11,11 +12,14 @@ namespace Kelly.Sampling.Visualization {
 		public VisualizerForm() {
 			InitializeComponent();
 
-			randomNumberGenerators.DataSource = GetInterfaceImplementations<IRandomNumberGenerator>();
-			sampleGenerators.DataSource = GetInterfaceImplementations<ISampleGenerator>();
+			randomNumberGenerators.DataSource = GetInterfaceImplementations<IRandomNumberGenerator>().ToList();
+
+			sampleGenerators.DataSource =
+				GetInterfaceImplementations<ISampleGenerator>()
+				.Where(g => GetSampleGeneratorConstructor(g) != null)
+				.ToList();
 
 			centerBiasSlider.Maximum = MaxCenterBias * CenterBiasGranularity;
-
 			centerBiasSlider.ValueChanged += BiasAmountChanged;
 
 			SetupRenderEvents();
@@ -41,10 +45,10 @@ namespace Kelly.Sampling.Visualization {
 		private const int MaxCenterBias = 5;
 		private const int CenterBiasGranularity = 100;
 
-		private static IList<Type> GetInterfaceImplementations<TInterface>() {
-			return (from t in typeof(TInterface).Assembly.GetTypes()
-					where typeof(TInterface).IsAssignableFrom(t) && !t.IsAbstract
-					select t).ToList();			
+		private static IEnumerable<Type> GetInterfaceImplementations<TInterface>() {
+			return from t in typeof (TInterface).Assembly.GetTypes()
+			       where typeof (TInterface).IsAssignableFrom(t) && !t.IsAbstract
+			       select t;
 		}
 
 		private void RenderSamples() {
@@ -91,12 +95,15 @@ namespace Kelly.Sampling.Visualization {
 			get { return imageContainer.Size; }
 		}
 
+		private static ConstructorInfo GetSampleGeneratorConstructor(Type sampleGeneratorType) {
+			return sampleGeneratorType.GetConstructor(Type.EmptyTypes)
+				?? sampleGeneratorType.GetConstructor(new[] { typeof(IRandomNumberGenerator) });
+		}
+
 		private ISampleGenerator CreateGenerator() {
 			var sampleGeneratorType = ((Type) sampleGenerators.SelectedValue);
 
-			var constructor =
-				sampleGeneratorType.GetConstructor(Type.EmptyTypes)
-				?? sampleGeneratorType.GetConstructor(new[] {typeof (IRandomNumberGenerator)});
+			var constructor = GetSampleGeneratorConstructor(sampleGeneratorType);
 
 			if (constructor == null) {
 				throw new Exception(

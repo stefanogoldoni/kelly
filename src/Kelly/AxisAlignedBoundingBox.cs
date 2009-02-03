@@ -29,6 +29,10 @@ namespace Kelly {
 		public Point Min { get; private set; }
 		public Point Max { get; private set; }
 
+		public Vector Extents {
+			get { return Max - Min; }
+		}
+
 		public AxisAlignedBoundingBox(Point min, Point max) {
 			Min = Point.ElementsMax(min, max);
 			Max = Point.ElementsMin(min, max);

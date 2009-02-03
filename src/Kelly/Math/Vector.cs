@@ -1,8 +1,9 @@
 ﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace Kelly.Math {
 	[DebuggerDisplay("{ToString()}")]
-	public struct Vector {
+	public partial struct Vector {
 		public Vector(double x, double y, double z) {
 			_x = x;
 			_y = y;
@@ -39,65 +40,34 @@ namespace Kelly.Math {
 			get { return EpsilonComparer.Compare(SquaredLength, 1) == 0; }
 		}
 
+		[IndexerName("Element")]
+		public double this[Axis axis] {
+			get {
+				if (axis == Axis.X)
+					return X;
+
+				if (axis == Axis.Y)
+					return Y;
+
+				return Z;
+			}
+		}
+
+		public Axis LongestAxis {
+			get {
+				if (X > Y && X > Z)
+					return Axis.X;
+
+				if (Y > Z)
+					return Axis.Y;
+
+				return Axis.Z;
+			}
+		}
+
 		public Vector ToUnitVector() {
 			return this / Length;
 		}
-
-		public static double DotProduct(Vector x, Vector y) {
-			return x.X * y.X
-				 + x.Y * y.Y
-				 + x.Z * y.Z;
-		}
-
-		public static Vector CrossProduct(Vector left, Vector right) {
-			return new Vector(
-				(left.Y * right.Z - left.Z * right.Y),
-				(left.Z * right.X - left.X * right.Z),
-				(left.X * right.Y - left.Y * right.X));
-		}
-
-		public static Vector operator -(Vector vector) {
-			return new Vector(-vector.X, -vector.Y, -vector.Z);
-		}
-
-		public static Vector operator +(Vector left, Vector right) {
-			return new Vector(
-				left.X + right.X,
-				left.Y + right.Y,
-				left.Z + right.Z
-			);
-		}
-
-		public static Vector operator -(Vector left, Vector right) {
-			return new Vector(
-				left.X - right.X,
-				left.Y - right.Y,
-				left.Z - right.Z
-			);			
-		}
-
-		public static Vector operator *(Vector vector, double scalar) {
-			return new Vector(
-				vector.X * scalar,
-				vector.Y * scalar,
-				vector.Z * scalar);
-		}
-
-		public static Vector operator *(double scalar, Vector vector) {
-			return vector * scalar;
-		}
-
-		public static Vector operator /(Vector vector, double scalar) {
-			return new Vector(
-				vector.X / scalar, 
-				vector.Y / scalar, 
-				vector.Z / scalar);
-		}
-
-		public static readonly Vector Zero = new Vector(0, 0, 0);
-		public static readonly Vector UnitX = new Vector(1f, 0, 0);
-		public static readonly Vector UnitY = new Vector(0, 1f, 0);
-		public static readonly Vector UnitZ = new Vector(0, 0, 1f);
 
 		public override string ToString() {
 			return string.Format("({0}, {1}, {2})", X, Y, Z);

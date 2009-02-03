@@ -9,6 +9,7 @@ using Kelly.Geometry;
 using Kelly.Materials;
 using Kelly.Math;
 using Kelly.RayTracing;
+using Kelly.Resources;
 using Kelly.Sampling;
 using Point=Kelly.Math.Point;
 
@@ -65,27 +66,13 @@ namespace Kelly.Visualization {
 			var target = new MemoryRenderTarget(result.Width, result.Height);
 
 			var color = new Color(1, 0.84, 0);
+			var mesh = new MeshLoader().Load("bunny4.mesh");
 
 			var world = new NaiveScene();
 			world.AddGeometry(
 				new Renderable(
-					new Triangle(new Point(50, 80, 2), new Point(65, 55, 2), new Point(35, 55, 2)),
+					mesh,
 					new SolidMaterial(color)));
-
-			world.AddGeometry(
-				new Renderable(
-					new Triangle(new Point(65, 55, 2), new Point(80, 30, 3), new Point(50, 30, 3)),
-					new SolidMaterial(color)));
-
-			world.AddGeometry(
-				new Renderable(
-					new Triangle(new Point(35, 55, 2), new Point(50, 30, 3), new Point(20, 30, 3)),
-					new SolidMaterial(color)));
-
-			world.AddGeometry(
-				new Renderable(
-					new Triangle(new Point(0, 1000, 3), new Point(1000, 0, 3), new Point(-1000, 0, 3)),
-					new SolidMaterial(Color.White)));
 
 			_renderMilliseconds = (int)new Stopwatch().Time(() =>
 				renderer.RenderScene(new RenderingContext {
